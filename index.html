@@ -13,8 +13,8 @@ html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--deep);color:#fff;overflow-x:hidden}
 .ff-section{width:100vw;min-height:100vh;position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;overflow:hidden}
 #ffPitch{align-items:center;background:var(--pitch)}
-.ff-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28;z-index:0}
-.ff-overlay{position:absolute;inset:0;background:linear-gradient(150deg,rgba(13,31,0,.72) 0%,rgba(13,31,0,.28) 50%,rgba(13,31,0,.68) 100%);z-index:1}
+.ff-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;z-index:0;pointer-events:none}
+.ff-overlay{position:absolute;inset:0;background:linear-gradient(150deg,rgba(13,31,0,.95) 0%,rgba(13,31,0,.5) 50%,rgba(13,31,0,.92) 100%);z-index:1}
 .ff-shapes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 .ff-statue{position:absolute;right:-2vw;bottom:0;height:88vh;width:auto;z-index:3;object-fit:contain;object-position:bottom right;animation:statueFloat 5s ease-in-out infinite;pointer-events:none;filter:drop-shadow(0 0 60px rgba(204,255,0,0.08))}
 @keyframes statueFloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-18px)}}
@@ -85,37 +85,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--deep);color:#fff;overflow
 .ff-oarr svg{width:12px;height:12px;stroke:rgba(204,255,0,.6);stroke-width:2.5;fill:none;transition:stroke .3s}
 .ff-offer:hover .ff-oarr svg{stroke:var(--deep)}
 .ff-offer.featured{border-color:rgba(204,255,0,.14);background:rgba(204,255,0,.025)}
-@media(max-width:768px){
-.ff-hero-content{padding:0 24px;max-width:100%}
-.ff-statue{height:42vh;right:-8vw;opacity:.25}
-.ff-pitch-content{padding:48px 24px;text-align:left}
-.ff-modal{border-radius:16px;padding:24px 20px}
-}
-@media(max-width:600px){
-.ff-h1{font-size:clamp(44px,14vw,68px)}
-.ff-hero-content{padding:0 20px;max-width:100%}
-.ff-logo{margin-bottom:24px}
-.ff-logoname{font-size:13px}
-.ff-sub-row{padding:10px 14px;gap:8px}
-.ff-sub-item{font-size:10px;letter-spacing:.06em}
-.ff-sub-dot{width:3px;height:3px}
-.ff-btn{font-size:13px;padding:13px 22px}
-.ff-scroll-hint{display:none}
-.ff-pitch-content{padding:48px 20px;text-align:left}
-.ff-ph2{font-size:clamp(38px,11vw,58px)}
-.ff-pb{font-size:14px}
-.ff-modal-bg{padding:16px 12px}
-.ff-modal{border-radius:16px;padding:20px 16px;max-width:100%}
-.ff-mt{font-size:22px}
-.ff-on{font-size:17px}
-.ff-offer{padding:18px 52px 18px 18px}
-.ff-statue{height:35vh;right:-12vw;opacity:.18}
-}
+@media(max-width:600px){.ff-h1{font-size:clamp(44px,14vw,72px)}.ff-sub-item{font-size:11px}.ff-modal{border-radius:16px}.ff-pitch-content{text-align:left}}
 </style>
 </head>
 <body>
 <section class="ff-section" id="ffHero">
-  <video class="ff-video-bg" autoplay muted loop playsinline><source src="your-video.mp4" type="video/mp4"></video>
+  <video class="ff-video-bg" id="ffVid" autoplay muted loop playsinline webkit-playsinline x5-playsinline disablePictureInPicture><source src="your-video.mp4" type="video/mp4"></video>
   <div class="ff-overlay"></div>
   <svg class="ff-shapes" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <circle cx="1280" cy="110" r="300" fill="none" stroke="rgba(204,255,0,0.1)" stroke-width="1"/>
@@ -233,6 +208,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--deep);color:#fff;overflow
 
 <script>
 setTimeout(function(){document.getElementById('ffHC').classList.add('vis');},500);
+// Force video play on mobile
+(function(){
+  var v = document.getElementById('ffVid');
+  if(!v) return;
+  v.muted = true;
+  var p = v.play();
+  if(p !== undefined){ p.catch(function(){ v.muted=true; v.play(); }); }
+  document.addEventListener('touchstart', function(){ v.muted=true; v.play(); }, {once:true, passive:true});
+})();
 var ob=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.15});
 ob.observe(document.getElementById('ffPC'));
 document.getElementById('ffModal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
