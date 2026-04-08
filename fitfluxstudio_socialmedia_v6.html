@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FitFluxStudio — Social Media Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lime:#B5F03C;
+  --dg:#3A7D1E;
+  --deep:#122409;
+  --white:#fff;
+  --off:#F5F8EF;
+  --muted:#7A8B68;
+  --border:#D4E4BB;
+  --card:#172F0A;
+  --cardtext:#C8DFA0;
+  --cardmuted:#8FA07A;
+  --cardborder:#1E3A0D;
+  --amber:#D4901C;
+  --teal:#4CAF82;
+  --blue:#85B7EB;
+  --wrap:1200px;
+  --px:clamp(20px,5vw,80px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep);overflow-x:hidden}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── TOP NAV ── */
+.topnav{background:var(--deep);border-bottom:1px solid var(--cardborder);position:sticky;top:0;z-index:200;padding:0 var(--px)}
+.topnav-inner{max-width:var(--wrap);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.topnav-logo{display:flex;align-items:center;gap:8px}
+.topnav-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.topnav-logo-text{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.1em;color:var(--white)}
+.topnav-logo-text span{color:var(--lime)}
+.topnav-tabs{display:flex;gap:4px}
+.topnav-tab{background:transparent;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.4);padding:8px 16px;border-radius:6px;cursor:pointer;transition:all .2s}
+.topnav-tab.active{background:rgba(181,240,60,.15);color:#B5F03C}
+.topnav-cta{background:#C2F050;color:#0F2208;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:800;padding:9px 20px;border:none;border-radius:6px;cursor:pointer;letter-spacing:.05em;white-space:nowrap}
+
+/* ── SECTION WRAPPER ── */
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--px)}
+
+/* ── DIVIDER ── */
+.divider{background:#C2F050;padding:11px var(--px)}
+.divider-inner{max-width:var(--wrap);margin:0 auto;display:flex;align-items:center;gap:12px}
+.dl{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.12em;color:var(--deep);white-space:nowrap}
+.dr{flex:1;height:1px;background:rgba(13,31,0,.2)}
+
+/* ══════════════════════════════
+   PAGE 1
+══════════════════════════════ */
+
+/* ── HERO ── */
+.hero{background:#0F2208;padding:80px var(--px) 72px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:5%;width:500px;height:500px;border-radius:50%;background:rgba(181,240,60,.05);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:8%;width:300px;height:300px;border-radius:50%;background:rgba(181,240,60,.03);pointer-events:none}
+.hero-inner{max-width:var(--wrap);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(181,240,60,.12);border:1px solid rgba(181,240,60,.3);border-radius:20px;padding:5px 14px;margin-bottom:20px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+.hero-badge-text{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--lime)}
+.hero-label{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(181,240,60,.55);margin-bottom:14px}
+.hero-h1{font-family:'DM Sans',sans-serif;font-size:clamp(44px,5vw,72px);font-weight:300;line-height:.9;color:var(--white);margin-bottom:18px;letter-spacing:-.02em}
+.hero-h1 strong{font-weight:800;color:var(--lime);display:block}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:30px;max-width:440px}
+.hero-sub strong{color:rgba(255,255,255,.9)}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-btn-primary{background:#C2F050;color:#0F2208;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:800;padding:15px 32px;border:none;border-radius:8px;cursor:pointer;letter-spacing:.05em}
+.hero-btn-secondary{background:transparent;color:rgba(255,255,255,.5);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:15px 24px;border:1px solid rgba(255,255,255,.15);border-radius:8px;cursor:pointer}
+
+/* Hero right — stats panel */
+.hero-right{background:rgba(255,255,255,.04);border:1px solid rgba(181,240,60,.12);border-radius:16px;padding:28px}
+.hero-stats-label{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(181,240,60,.45);margin-bottom:18px}
+.hero-stat-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.hero-stat-row:last-child{border-bottom:none}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,.5)}
+.hero-stat-val{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--lime);line-height:1}
+.hero-stat-unit{font-size:11px;color:rgba(181,240,60,.5);margin-left:3px}
+.hero-bar-row{display:flex;align-items:center;gap:10px;margin-top:16px}
+.hero-bar-label{font-size:10px;color:rgba(255,255,255,.4);width:80px;flex-shrink:0}
+.hero-bar-track{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.hero-bar-fill{height:100%;border-radius:3px;background:var(--lime)}
+
+/* ── TRUTHS ── */
+.truths{background:#0F2208;padding:56px var(--px);border-top:1px solid var(--cardborder)}
+.truths-inner{max-width:var(--wrap);margin:0 auto}
+.truths-label{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(181,240,60,.45);margin-bottom:32px}
+.truths-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.truth-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:24px}
+.truth-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(181,240,60,.12);line-height:1;margin-bottom:10px}
+.truth-text{font-size:13px;color:var(--cardtext);line-height:1.7}
+.truth-text strong{color:var(--lime)}
+
+/* ── INTRO ── */
+.intro{padding:72px var(--px);background:var(--off)}
+.intro-inner{max-width:var(--wrap);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.intro-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);color:var(--deep);letter-spacing:.02em;line-height:1;margin-bottom:12px}
+.intro-h2 em{color:var(--dg);font-style:normal}
+.intro-body{font-size:14px;color:var(--muted);line-height:1.8}
+.intro-body strong{color:var(--deep)}
+.intro-body p{margin-bottom:14px}
+.intro-body p:last-child{margin-bottom:0}
+
+/* ── PILLARS ── */
+.pillars-grid{display:flex;flex-direction:column;gap:10px}
+.pillar-item{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:border-color .2s}
+.pillar-item:hover{border-color:var(--dg)}
+.pillar-icon{font-size:22px;flex-shrink:0;line-height:1;margin-top:1px}
+.pillar-name{font-size:13px;font-weight:700;color:var(--deep);margin-bottom:3px}
+.pillar-desc{font-size:12px;color:var(--muted);line-height:1.55}
+
+/* ── TIERS ── */
+.tiers-section{padding:72px var(--px);background:var(--white);border-top:1px solid var(--border)}
+.tiers-inner{max-width:var(--wrap);margin:0 auto}
+.tiers-header{text-align:center;margin-bottom:48px}
+.tiers-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3vw,52px);color:var(--deep);letter-spacing:.02em;margin-bottom:8px}
+.tiers-h2 em{color:var(--dg);font-style:normal}
+.tiers-sub{font-size:14px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.7}
+.tiers-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch}
+
+/* Tier card */
+.tier-card{border-radius:16px;overflow:hidden;border:1px solid var(--border);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.tier-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.1)}
+.tier-card.featured{border-color:var(--dg);box-shadow:0 4px 32px rgba(45,106,15,.15)}
+.tier-card.featured:hover{box-shadow:0 16px 48px rgba(45,106,15,.2)}
+
+.tier-header{padding:28px 24px 22px}
+.tier-header.presence{background:var(--off)}
+.tier-header.authority{background:var(--deep)}
+.tier-header.category{background:linear-gradient(135deg,#182E0A 0%,#264A14 100%)}
+
+.tier-tag{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border-radius:10px;margin-bottom:12px}
+.tier-tag.presence{background:rgba(45,106,15,.12);color:var(--dg)}
+.tier-tag.authority{background:rgba(181,240,60,.15);color:var(--lime)}
+.tier-tag.category{background:#C2F050;color:#0F2208}
+
+.tier-name{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.06em;line-height:1;margin-bottom:6px}
+.tier-name.presence{color:var(--deep)}
+.tier-name.authority{color:var(--white)}
+.tier-name.category{color:var(--lime)}
+
+.tier-hook{font-size:12px;line-height:1.55;font-style:italic;margin-bottom:18px}
+.tier-hook.presence{color:var(--muted)}
+.tier-hook.authority{color:rgba(255,255,255,.55)}
+.tier-hook.category{color:rgba(181,240,60,.65)}
+
+.tier-price-row{display:flex;align-items:baseline;gap:4px}
+.tier-price{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1}
+.tier-price.presence{color:var(--deep)}
+.tier-price.authority{color:var(--lime)}
+.tier-price.category{color:var(--lime)}
+.tier-price-per{font-size:13px;font-weight:500}
+.tier-price-per.presence{color:var(--muted)}
+.tier-price-per.authority{color:rgba(255,255,255,.45)}
+.tier-price-per.category{color:rgba(181,240,60,.55)}
+
+/* pill stats */
+.pill-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:16px 24px;background:rgba(0,0,0,.03)}
+.tier-card .tier-header.authority + .pill-grid,
+.tier-card .tier-header.category + .pill-grid{background:rgba(0,0,0,.15)}
+.pill-grid.presence-pills{background:rgba(45,106,15,.05)}
+.pill-grid.authority-pills{background:rgba(0,0,0,.2)}
+.pill-grid.category-pills{background:rgba(0,0,0,.2)}
+.pill{border-radius:8px;padding:10px 6px;text-align:center}
+.pill-num{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1}
+.pill-label{font-size:8px;font-weight:600;letter-spacing:.06em;margin-top:2px;text-transform:uppercase;opacity:.7}
+
+/* tier body */
+.tier-body{padding:20px 24px 24px;flex:1;display:flex;flex-direction:column}
+.tier-body.light{background:var(--white)}
+.tier-body.dark{background:#1C3A0E}
+.tier-section-label{font-size:8px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:4px}
+.tier-section-label.dm{color:var(--cardmuted)}
+.tier-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.tier-check{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:9px;font-weight:700}
+.tier-check.green{background:rgba(76,175,130,.15);color:#4CAF82}
+.tier-check.lime{background:rgba(181,240,60,.15);color:var(--lime)}
+.tier-check.amber{background:rgba(224,155,32,.15);color:var(--amber)}
+.tier-check.dash{background:rgba(107,122,90,.08);color:rgba(107,122,90,.4)}
+.tier-item{font-size:12px;line-height:1.55;color:var(--deep)}
+.tier-item strong{color:var(--deep)}
+.tier-item.light-text{color:var(--cardtext)}
+.tier-item.light-text strong{color:var(--lime)}
+.tier-item.na{color:rgba(107,122,90,.35);font-size:11px}
+
+.tier-exclusive{display:flex;align-items:flex-start;gap:8px;margin-top:auto;padding:10px 12px;border-radius:8px}
+.tier-exclusive.lx{background:rgba(45,106,15,.07);margin-top:16px}
+.tier-exclusive.dx{background:rgba(181,240,60,.06);margin-top:16px}
+.tier-exclusive.gx{background:rgba(224,155,32,.07);border:1px solid rgba(224,155,32,.2);margin-top:16px}
+.tier-excl-text{font-size:10px;color:var(--muted);line-height:1.5}
+.tier-excl-text strong{color:var(--deep)}
+.tier-excl-text.dm{color:var(--cardmuted)}
+.tier-excl-text.dm strong{color:var(--lime)}
+.tier-excl-text.gm strong{color:var(--amber)}
+
+.tier-cta{width:100%;padding:14px;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:800;letter-spacing:.04em;cursor:pointer;margin-top:16px;transition:opacity .2s}
+.tier-cta:hover{opacity:.9}
+.tier-cta.presence{background:#1E3A0D;color:#B5F03C}
+.tier-cta.authority{background:#C2F050;color:#0F2208}
+.tier-cta.category{background:#C2F050;color:#0F2208}
+
+/* ── DASHBOARD ── */
+.dash-section{padding:72px var(--px);background:#182E0A}
+.dash-inner{max-width:var(--wrap);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.dash-left-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,52px);color:var(--white);letter-spacing:.02em;line-height:1;margin-bottom:12px}
+.dash-left-h2 span{color:var(--lime)}
+.dash-left-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:24px}
+.dash-left-sub strong{color:rgba(255,255,255,.85)}
+.dash-points{display:flex;flex-direction:column;gap:12px}
+.dash-point{display:flex;align-items:flex-start;gap:12px}
+.dash-point-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);flex-shrink:0;margin-top:5px}
+.dash-point-text{font-size:13px;color:rgba(255,255,255,.6);line-height:1.6}
+.dash-point-text strong{color:var(--white)}
+
+.dash-preview{background:rgba(255,255,255,.04);border:1px solid rgba(181,240,60,.15);border-radius:16px;padding:24px}
+.dash-preview-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(181,240,60,.45);margin-bottom:18px}
+.dash-stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px}
+.dash-stat{background:var(--cardborder);border-radius:10px;padding:14px 10px;text-align:center}
+.dash-stat-num{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--lime);line-height:1}
+.dash-stat-label{font-size:9px;color:var(--cardmuted);margin-top:3px}
+.dash-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.dash-bar-label{font-size:10px;color:var(--cardmuted);width:90px;flex-shrink:0}
+.dash-bar-track{flex:1;height:5px;background:var(--cardborder);border-radius:3px;overflow:hidden}
+.dash-bar-fill{height:100%;border-radius:3px}
+.dash-bar-val{font-size:10px;color:var(--cardtext);width:32px;text-align:right;flex-shrink:0}
+.dash-tag-row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.dash-tag{background:rgba(181,240,60,.08);border:1px solid rgba(181,240,60,.15);border-radius:6px;padding:5px 10px;font-size:9px;font-weight:700;color:rgba(181,240,60,.6);letter-spacing:.08em;text-transform:uppercase}
+
+/* ══════════════════════════════
+   PAGE 2
+══════════════════════════════ */
+
+/* ── FOR SECTION ── */
+.for-section{background:#182E0A;padding:72px var(--px)}
+.for-inner{max-width:var(--wrap);margin:0 auto}
+.for-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);color:var(--lime);letter-spacing:.04em;margin-bottom:8px;line-height:1}
+.for-sub{font-size:14px;color:var(--cardmuted);margin-bottom:32px;line-height:1.6;max-width:520px}
+.for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.for-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:20px}
+.for-item-head{font-size:12px;font-weight:700;color:var(--lime);margin-bottom:6px}
+.for-item-body{font-size:12px;color:var(--cardmuted);line-height:1.65}
+
+/* ── JOURNEY ── */
+.journey{padding:72px var(--px);background:var(--off)}
+.journey-inner{max-width:var(--wrap);margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start}
+.journey-left-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,3.5vw,54px);color:var(--deep);letter-spacing:.02em;line-height:1;margin-bottom:10px}
+.journey-left-h2 em{color:var(--dg);font-style:normal}
+.journey-left-sub{font-size:13px;color:var(--muted);line-height:1.7}
+.journey-steps{position:relative;padding-left:36px}
+.journey-steps::before{content:'';position:absolute;left:14px;top:10px;bottom:10px;width:2px;background:linear-gradient(to bottom,#B5F03C,#3A7D1E,rgba(58,125,30,.1))}
+.journey-step{position:relative;margin-bottom:36px}
+.journey-step:last-child{margin-bottom:0}
+.journey-dot{position:absolute;left:-29px;top:4px;width:16px;height:16px;border-radius:50%;border:2px solid #B5F03C;background:var(--off);display:flex;align-items:center;justify-content:center}
+.journey-dot::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--lime)}
+.journey-month{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--dg);margin-bottom:5px}
+.journey-title{font-size:18px;font-weight:700;color:var(--deep);margin-bottom:6px}
+.journey-desc{font-size:13px;color:var(--muted);line-height:1.75}
+.journey-desc strong{color:var(--deep)}
+
+/* ── OBJECTIONS ── */
+.obj-section{background:var(--white);padding:72px var(--px);border-top:1px solid var(--border)}
+.obj-inner{max-width:var(--wrap);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.obj-left-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,3vw,48px);color:var(--deep);letter-spacing:.02em;margin-bottom:10px;line-height:1}
+.obj-left-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.obj-cta-card{background:var(--off);border:1px solid var(--border);border-radius:12px;padding:24px}
+.obj-cta-card-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dg);margin-bottom:10px}
+.obj-cta-card-text{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+.obj-cta-card-text strong{color:var(--deep)}
+.obj-cta-btn{width:100%;background:var(--deep);color:var(--lime);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:800;padding:14px;border:none;border-radius:8px;cursor:pointer;letter-spacing:.04em}
+.obj-stack{display:flex;flex-direction:column;gap:10px}
+.obj-item{border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.obj-q{padding:16px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:background .15s}
+.obj-q:hover{background:var(--off)}
+.obj-q-text{font-size:13px;font-weight:700;color:var(--deep);line-height:1.4}
+.obj-arrow{font-size:11px;color:var(--muted);flex-shrink:0;transition:transform .2s}
+.obj-a{display:none;padding:0 18px 16px;font-size:13px;color:var(--muted);line-height:1.75;border-top:1px solid var(--border);padding-top:14px;margin-top:0}
+.obj-a strong{color:var(--deep)}
+
+/* ── FINAL CTA ── */
+.final-cta{background:var(--deep);padding:80px var(--px);text-align:center;position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:rgba(181,240,60,.04);pointer-events:none}
+.final-cta-inner{max-width:600px;margin:0 auto;position:relative;z-index:1}
+.final-eyebrow{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(181,240,60,.45);margin-bottom:16px}
+.final-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,5vw,72px);color:var(--white);letter-spacing:.02em;line-height:.92;margin-bottom:10px}
+.final-h2 span{color:var(--lime)}
+.final-sub{font-size:14px;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:32px}
+.final-sub strong{color:rgba(255,255,255,.8)}
+.final-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.final-btn-primary{background:#C2F050;color:#0F2208;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;padding:16px 40px;border:none;border-radius:8px;cursor:pointer;letter-spacing:.04em}
+.final-btn-secondary{background:transparent;color:rgba(255,255,255,.4);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:16px 28px;border:1px solid rgba(255,255,255,.12);border-radius:8px;cursor:pointer}
+.urgency{font-size:11px;color:rgba(181,240,60,.45);line-height:1.6}
+.urgency strong{color:var(--lime)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .truths-grid{grid-template-columns:1fr}
+  .intro-inner{grid-template-columns:1fr}
+  .tiers-grid{grid-template-columns:1fr}
+  .dash-inner{grid-template-columns:1fr}
+  .for-grid{grid-template-columns:1fr 1fr}
+  .journey-inner{grid-template-columns:1fr}
+  .obj-inner{grid-template-columns:1fr}
+  .topnav-cta{display:none}
+}
+@media(max-width:600px){
+  .for-grid{grid-template-columns:1fr}
+  .hero-h1{font-size:38px}
+  .tiers-h2{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-logo">
+      <div class="topnav-logo-dot"></div>
+      <div class="topnav-logo-text">FITFLUX<span>STUDIO</span> · Social Media</div>
+    </div>
+    <div class="topnav-tabs">
+      <button class="topnav-tab active" id="nav1" onclick="goPage1()">The Offer</button>
+      <button class="topnav-tab" id="nav2" onclick="goPage2()">Why It Works</button>
+    </div>
+    <button class="topnav-cta" onclick="goPage2()">Claim my territory ↗</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════ -->
+<div id="page1" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <div class="hero-badge-text">FitFluxStudio · Social Media Management</div>
+        </div>
+        <div class="hero-label">For fitness coaches who are done guessing</div>
+        <h1 class="hero-h1">Your content.<br><strong>Working for you.<br>Every day.</strong></h1>
+        <p class="hero-sub">You became a coach to change lives — <strong>not to spend 3 hours writing captions.</strong> We handle the content. You handle the coaching.</p>
+        <div class="hero-btns">
+          <button class="hero-btn-primary" onclick="document.getElementById('tiers').scrollIntoView({behavior:'smooth'})">See the plans ↓</button>
+          <button class="hero-btn-secondary" onclick="goPage2()">See what changes in 90 days →</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stats-label">Live dashboard — this week</div>
+        <div class="hero-stat-row">
+          <div class="hero-stat-label">Posts published</div>
+          <div><span class="hero-stat-val">24</span><span class="hero-stat-unit">posts</span></div>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat-label">Profile reach</div>
+          <div><span class="hero-stat-val">+847</span><span class="hero-stat-unit">people</span></div>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat-label">Enquiries generated</div>
+          <div><span class="hero-stat-val">12</span><span class="hero-stat-unit">leads</span></div>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat-label">Follower growth</div>
+          <div><span class="hero-stat-val">+218</span><span class="hero-stat-unit">new</span></div>
+        </div>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06)">
+          <div class="hero-bar-row">
+            <div class="hero-bar-label">Engagement rate</div>
+            <div class="hero-bar-track"><div class="hero-bar-fill" style="width:78%"></div></div>
+            <div style="font-size:10px;color:rgba(181,240,60,.6);width:32px;text-align:right">7.8%</div>
+          </div>
+          <div class="hero-bar-row">
+            <div class="hero-bar-label">Profile visits</div>
+            <div class="hero-bar-track"><div class="hero-bar-fill" style="width:62%;background:#4CAF82"></div></div>
+            <div style="font-size:10px;color:#4CAF82;width:32px;text-align:right">+62%</div>
+          </div>
+          <div class="hero-bar-row">
+            <div class="hero-bar-label">Link clicks</div>
+            <div class="hero-bar-track"><div class="hero-bar-fill" style="width:44%;background:var(--amber)"></div></div>
+            <div style="font-size:10px;color:var(--amber);width:32px;text-align:right">+44%</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;font-size:10px;color:rgba(255,255,255,.25);font-style:italic">Updated live · daily, weekly &amp; monthly views available</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 TRUTHS -->
+  <section class="truths">
+    <div class="truths-inner">
+      <div class="truths-label">Why most coaches' content isn't working</div>
+      <div class="truths-grid">
+        <div class="truth-card">
+          <div class="truth-num">01</div>
+          <div class="truth-text">You're posting <strong>randomly, not strategically.</strong> Random content builds followers. Strategic content builds clients. Without a content pillar system, you're creating noise — not authority.</div>
+        </div>
+        <div class="truth-card">
+          <div class="truth-num">02</div>
+          <div class="truth-text">Your content has <strong>no story thread.</strong> A single post doesn't convert anyone. A connected content journey — attract, nurture, convert — does. Most coaches never build it.</div>
+        </div>
+        <div class="truth-card">
+          <div class="truth-num">03</div>
+          <div class="truth-text">You go <strong>silent for weeks</strong> then post five things in a day. The algorithm doesn't reward bursts. It rewards consistency — the one thing every coach says they'll fix and never do alone.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO + PILLARS -->
+  <div class="divider"><div class="divider-inner"><div class="dl">The content pillar system</div><div class="dr"></div></div></div>
+  <section class="intro">
+    <div class="intro-inner">
+      <div>
+        <div class="intro-h2">Content that<br><em>actually converts</em></div>
+        <div class="intro-body">
+          <p>We don't just post on your behalf. We <strong>build a content system</strong> — rooted in your voice, your niche, and a story that moves the right person from stranger to paying client.</p>
+          <p>Every piece of content has a purpose. Every week builds on the last. By Month 3, your audience isn't just growing — it's converting.</p>
+          <p>The content pillar system is what makes this different from every other social media service. <strong>Five pillars. One connected story. Zero random posting.</strong></p>
+        </div>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar-item"><div class="pillar-icon">⚡</div><div><div class="pillar-name">Transformation</div><div class="pillar-desc">Client results, before/after journeys, proof that what you do works</div></div></div>
+        <div class="pillar-item"><div class="pillar-icon">🎓</div><div><div class="pillar-name">Education</div><div class="pillar-desc">Tips, myth-busting, how-tos — content that makes you the expert they trust</div></div></div>
+        <div class="pillar-item"><div class="pillar-icon">🏆</div><div><div class="pillar-name">Authority</div><div class="pillar-desc">Your methodology, your opinion — the content that makes you different</div></div></div>
+        <div class="pillar-item"><div class="pillar-icon">🤝</div><div><div class="pillar-name">Relatability</div><div class="pillar-desc">Real coach life, behind the scenes — content that makes people trust you as a person</div></div></div>
+        <div class="pillar-item"><div class="pillar-icon">🎯</div><div><div class="pillar-name">Conversion</div><div class="pillar-desc">Offers, testimonials, CTAs — content that turns warm followers into paying clients</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <div class="divider"><div class="divider-inner"><div class="dl">Choose your plan</div><div class="dr"></div></div></div>
+  <section class="tiers-section" id="tiers">
+    <div class="tiers-inner">
+      <div class="tiers-header">
+        <div class="tiers-h2">Three tiers. One <em>system.</em></div>
+        <div class="tiers-sub">Every tier includes territory exclusivity — your niche + city locked in writing. Max 3 coaches per territory, ever.</div>
+      </div>
+      <!-- BILLING TOGGLE -->
+      <div style="display:flex;justify-content:center;margin-bottom:40px">
+        <div style="background:#F0F4E8;border:1px solid var(--border);border-radius:60px;padding:6px;display:inline-flex;gap:6px">
+          <button id="bill-monthly" onclick="setBilling('monthly')" style="background:#1E3A0D;color:#B5F03C;border:none;border-radius:50px;padding:14px 32px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.04em;transition:all .2s">Monthly</button>
+          <button id="bill-2month" onclick="setBilling('2month')" style="background:transparent;color:var(--muted);border:none;border-radius:50px;padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.04em;transition:all .2s;display:flex;align-items:center;gap:8px">
+            2 Months <span style="background:#2E9E6A;color:#fff;font-size:10px;padding:3px 9px;border-radius:8px;font-weight:800;flex-shrink:0">SAVE $100</span>
+          </button>
+          <button id="bill-3month" onclick="setBilling('3month')" style="background:transparent;color:var(--muted);border:none;border-radius:50px;padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.04em;transition:all .2s;display:flex;align-items:center;gap:8px">
+            3 Months <span style="background:#A8E030;color:#0F2208;font-size:10px;padding:3px 9px;border-radius:8px;font-weight:800;flex-shrink:0">SAVE $300</span>
+          </button>
+        </div>
+      </div>
+      <div id="billing-note" style="text-align:center;margin-top:-28px;margin-bottom:32px;font-size:12px;color:var(--muted);display:none;font-weight:600"></div>
+
+      <div class="tiers-grid">
+
+        <!-- PRESENCE -->
+        <div class="tier-card">
+          <div class="tier-header presence">
+            <span class="tier-tag presence">Starter</span>
+            <div class="tier-name presence">Presence</div>
+            <div class="tier-hook presence">"You show up every week. Without touching your phone."</div>
+            <div class="tier-price-row">
+              <div class="tier-price presence" id="price-presence">$350</div>
+              <div class="tier-price-per presence" id="per-presence">/month</div>
+            </div>
+          </div>
+          <div class="pill-grid presence-pills">
+            <div class="pill" style="background:rgba(45,106,15,.08)">
+              <div class="pill-num" style="color:var(--dg)">6</div>
+              <div class="pill-label" style="color:var(--dg)">Posts/wk</div>
+            </div>
+            <div class="pill" style="background:rgba(45,106,15,.08)">
+              <div class="pill-num" style="color:var(--dg)">3+3</div>
+              <div class="pill-label" style="color:var(--dg)">Vid+Graphic</div>
+            </div>
+            <div class="pill" style="background:rgba(45,106,15,.08)">
+              <div class="pill-num" style="color:var(--dg)">5</div>
+              <div class="pill-label" style="color:var(--dg)">Stories/wk</div>
+            </div>
+          </div>
+          <div class="tier-body light">
+            <div class="tier-section-label">What's included</div>
+            <div class="tier-row"><div class="tier-check green">✓</div><div class="tier-item"><strong>Content pillar + story strategy</strong> — every post has a purpose, every week builds on the last</div></div>
+            <div class="tier-row"><div class="tier-check green">✓</div><div class="tier-item"><strong>Full caption copywriting</strong> in your voice, for your niche</div></div>
+            <div class="tier-row"><div class="tier-check green">✓</div><div class="tier-item"><strong>Brand voice intake</strong> — sounds like you, not an agency</div></div>
+            <div class="tier-row"><div class="tier-check green">✓</div><div class="tier-item"><strong>Profile optimisation</strong> — the right client finds you first</div></div>
+            <div class="tier-row"><div class="tier-check green">✓</div><div class="tier-item"><strong>Content scheduling</strong> — posted at peak times, automatically</div></div>
+            <div class="tier-row"><div class="tier-check green">✓</div><div class="tier-item"><strong>Live dashboard</strong> — daily, weekly &amp; monthly activity in real time</div></div>
+            <div class="tier-row"><div class="tier-check dash">—</div><div class="tier-item na">Engagement management</div></div>
+            <div class="tier-row"><div class="tier-check dash">—</div><div class="tier-item na">Strategy calls</div></div>
+            <div class="tier-row"><div class="tier-check dash">—</div><div class="tier-item na">Ad creative</div></div>
+            <div class="tier-exclusive lx">
+              <div style="font-size:16px">🔒</div>
+              <div class="tier-excl-text"><strong>Territory locked</strong> — niche + city reserved. Max 3 coaches per territory. Ever.</div>
+            </div>
+            <button class="tier-cta presence" onclick="claimTerritory('Presence','$350')">Start with Presence ↗</button>
+          </div>
+        </div>
+
+        <!-- AUTHORITY -->
+        <div class="tier-card featured">
+          <div class="tier-header authority">
+            <span class="tier-tag authority">Most Popular</span>
+            <div class="tier-name authority">Authority</div>
+            <div class="tier-hook authority">"You become the coach people already trust before they enquire."</div>
+            <div class="tier-price-row">
+              <div class="tier-price authority" id="price-authority">$700</div>
+              <div class="tier-price-per authority" id="per-authority">/month</div>
+            </div>
+          </div>
+          <div class="pill-grid authority-pills">
+            <div class="pill" style="background:#1E3A0D;border:1px solid rgba(181,240,60,.35)">
+              <div class="pill-num" style="color:#B5F03C">12</div>
+              <div class="pill-label" style="color:rgba(181,240,60,.8)">Posts/wk</div>
+            </div>
+            <div class="pill" style="background:#1E3A0D;border:1px solid rgba(181,240,60,.35)">
+              <div class="pill-num" style="color:#B5F03C">6+6</div>
+              <div class="pill-label" style="color:rgba(181,240,60,.8)">Vid+Graphic</div>
+            </div>
+            <div class="pill" style="background:#1E3A0D;border:1px solid rgba(181,240,60,.35)">
+              <div class="pill-num" style="color:#B5F03C">10</div>
+              <div class="pill-label" style="color:rgba(181,240,60,.8)">Stories/wk</div>
+            </div>
+          </div>
+          <div class="tier-body dark">
+            <div class="tier-section-label dm">Everything in Presence, plus</div>
+            <div class="tier-row"><div class="tier-check lime">✓</div><div class="tier-item light-text"><strong>Engagement management</strong> — comments &amp; replies handled in your voice</div></div>
+            <div class="tier-row"><div class="tier-check lime">✓</div><div class="tier-item light-text"><strong>Monthly strategy call</strong> — your content works toward a goal, not just a calendar</div></div>
+            <div class="tier-row"><div class="tier-check lime">✓</div><div class="tier-item light-text"><strong>Monthly performance report</strong> — follower growth, reach, engagement, enquiries</div></div>
+            <div class="tier-row"><div class="tier-check lime">✓</div><div class="tier-item light-text"><strong>Live dashboard</strong> — daily, weekly, monthly + <strong>enquiry tracking</strong></div></div>
+            <div class="tier-row"><div class="tier-check dash">—</div><div class="tier-item na">Ad creative</div></div>
+            <div class="tier-row"><div class="tier-check dash">—</div><div class="tier-item na">DM management</div></div>
+            <div class="tier-row"><div class="tier-check dash">—</div><div class="tier-item na">Competitor analysis</div></div>
+            <div class="tier-exclusive dx">
+              <div style="font-size:16px">🔒</div>
+              <div class="tier-excl-text dm"><strong>Territory locked</strong> — niche + city reserved. Max 3 coaches per territory. Ever.</div>
+            </div>
+            <button class="tier-cta authority" onclick="claimTerritory('Authority','$700')">Start with Authority ↗</button>
+          </div>
+        </div>
+
+        <!-- CATEGORY -->
+        <div class="tier-card">
+          <div class="tier-header category">
+            <span class="tier-tag category">Premium</span>
+            <div class="tier-name category">Category King/Queen</div>
+            <div class="tier-hook category">"You own your niche online. Completely."</div>
+            <div class="tier-price-row">
+              <div class="tier-price category" id="price-category">$1,200</div>
+              <div class="tier-price-per category" id="per-category">/month</div>
+            </div>
+          </div>
+          <div class="pill-grid category-pills">
+            <div class="pill" style="background:#2A1C06;border:1px solid rgba(200,137,26,.4)">
+              <div class="pill-num" style="color:#E09B20">18</div>
+              <div class="pill-label" style="color:rgba(224,155,32,.9)">Posts/wk</div>
+            </div>
+            <div class="pill" style="background:#2A1C06;border:1px solid rgba(200,137,26,.4)">
+              <div class="pill-num" style="color:#E09B20">10+8</div>
+              <div class="pill-label" style="color:rgba(224,155,32,.9)">Vid+Graphic</div>
+            </div>
+            <div class="pill" style="background:#2A1C06;border:1px solid rgba(200,137,26,.4)">
+              <div class="pill-num" style="color:#E09B20">Daily</div>
+              <div class="pill-label" style="color:rgba(224,155,32,.9)">Stories</div>
+            </div>
+          </div>
+          <div class="tier-body dark">
+            <div class="tier-section-label dm">Everything in Authority, plus</div>
+            <div class="tier-row"><div class="tier-check amber">✓</div><div class="tier-item light-text"><strong>Full DM management</strong> — warm leads handled in your voice 24/7</div></div>
+            <div class="tier-row"><div class="tier-check amber">✓</div><div class="tier-item light-text"><strong>Bi-weekly strategy calls</strong> — fast pivots, faster growth</div></div>
+            <div class="tier-row"><div class="tier-check amber">✓</div><div class="tier-item light-text"><strong>Ad creative built</strong> — ready when you want to scale</div></div>
+            <div class="tier-row"><div class="tier-check amber">✓</div><div class="tier-item light-text"><strong>Competitor analysis</strong> — monthly deep dive on what's winning in your niche</div></div>
+            <div class="tier-row"><div class="tier-check amber">✓</div><div class="tier-item light-text"><strong>Hook writing</strong> — every caption engineered to stop the scroll</div></div>
+            <div class="tier-row"><div class="tier-check amber">✓</div><div class="tier-item light-text"><strong>Live dashboard</strong> — real-time activity + <strong>growth projections</strong></div></div>
+            <div class="tier-exclusive gx">
+              <div style="font-size:16px">👑</div>
+              <div class="tier-excl-text gm"><strong style="color:var(--amber)">You are the only coach</strong> in your niche + city. No exceptions. No second place.</div>
+            </div>
+            <button class="tier-cta category" onclick="claimTerritory('Category King/Queen','$1,200')">Claim my territory ↗</button>
+          </div>
+        </div>
+
+      </div><!-- /tiers-grid -->
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section class="dash-section">
+    <div class="dash-inner">
+      <div>
+        <div class="dash-left-h2">Your <span>live dashboard.</span><br>Always on.</div>
+        <p class="dash-left-sub">No other social media service gives coaches this. A <strong>real-time performance dashboard</strong> you can check any time — see exactly what's going out, what's working, and what's growing.</p>
+        <div class="dash-points">
+          <div class="dash-point"><div class="dash-point-dot"></div><div class="dash-point-text"><strong>Daily snapshots</strong> — every post, every story, every piece of content tracked live</div></div>
+          <div class="dash-point"><div class="dash-point-dot"></div><div class="dash-point-text"><strong>Weekly performance</strong> — reach, engagement rate, profile visits, link clicks</div></div>
+          <div class="dash-point"><div class="dash-point-dot"></div><div class="dash-point-text"><strong>Monthly growth report</strong> — follower growth, enquiries generated, trend analysis</div></div>
+          <div class="dash-point"><div class="dash-point-dot"></div><div class="dash-point-text"><strong>Enquiry tracking</strong> (Authority+) — see which content is actually generating leads</div></div>
+          <div class="dash-point"><div class="dash-point-dot"></div><div class="dash-point-text"><strong>Growth projections</strong> (Category) — forward-looking modelling based on current trajectory</div></div>
+        </div>
+      </div>
+      <div class="dash-preview">
+        <div class="dash-preview-label">Live dashboard — this week</div>
+        <div class="dash-stats-row">
+          <div class="dash-stat"><div class="dash-stat-num">24</div><div class="dash-stat-label">Posts live</div></div>
+          <div class="dash-stat"><div class="dash-stat-num">+847</div><div class="dash-stat-label">Reach</div></div>
+          <div class="dash-stat"><div class="dash-stat-num">12</div><div class="dash-stat-label">Enquiries</div></div>
+        </div>
+        <div class="dash-bar-row">
+          <div class="dash-bar-label">Engagement</div>
+          <div class="dash-bar-track"><div class="dash-bar-fill" style="width:78%;background:var(--lime)"></div></div>
+          <div class="dash-bar-val" style="color:var(--lime)">7.8%</div>
+        </div>
+        <div class="dash-bar-row">
+          <div class="dash-bar-label">Profile visits</div>
+          <div class="dash-bar-track"><div class="dash-bar-fill" style="width:62%;background:#4CAF82"></div></div>
+          <div class="dash-bar-val" style="color:#4CAF82">+62%</div>
+        </div>
+        <div class="dash-bar-row">
+          <div class="dash-bar-label">Link clicks</div>
+          <div class="dash-bar-track"><div class="dash-bar-fill" style="width:44%;background:var(--amber)"></div></div>
+          <div class="dash-bar-val" style="color:var(--amber)">+44%</div>
+        </div>
+        <div class="dash-bar-row">
+          <div class="dash-bar-label">New followers</div>
+          <div class="dash-bar-track"><div class="dash-bar-fill" style="width:55%;background:var(--blue)"></div></div>
+          <div class="dash-bar-val" style="color:var(--blue)">+218</div>
+        </div>
+        <div class="dash-tag-row">
+          <div class="dash-tag">Daily view</div>
+          <div class="dash-tag">Weekly summary</div>
+          <div class="dash-tag">Monthly report</div>
+          <div class="dash-tag">Always live</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="background:var(--off);padding:40px var(--px);text-align:center">
+    <button onclick="goPage2()" style="background:var(--deep);color:var(--lime);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:800;padding:15px 40px;border:none;border-radius:8px;cursor:pointer;letter-spacing:.04em">See what changes in 90 days →</button>
+  </div>
+
+</div><!-- /page1 -->
+
+
+<!-- ══════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════ -->
+<div id="page2" class="page">
+
+  <!-- WHO IT'S FOR -->
+  <section class="for-section">
+    <div class="for-inner">
+      <div class="for-h2">This is built for you if —</div>
+      <div class="for-sub">Be honest. If two or more of these hit, this is your next move.</div>
+      <div class="for-grid">
+        <div class="for-item"><div class="for-item-head">You go silent</div><div class="for-item-body">You post consistently for a week then disappear for three. You know it's a problem. You just can't fix it alone.</div></div>
+        <div class="for-item"><div class="for-item-head">You hate captions</div><div class="for-item-body">You stare at the screen for 20 minutes to write three sentences — then post something vague and hope for the best.</div></div>
+        <div class="for-item"><div class="for-item-head">No strategy</div><div class="for-item-body">You post what feels right that day. No plan, no thread, no story. Your content doesn't build on itself.</div></div>
+        <div class="for-item"><div class="for-item-head">Followers ≠ clients</div><div class="for-item-body">You have an audience but they're not enquiring. The problem isn't reach — it's that your content isn't converting.</div></div>
+        <div class="for-item"><div class="for-item-head">No time</div><div class="for-item-body">You're coaching, managing clients, running a business. Content is the last thing on your list — and it shows.</div></div>
+        <div class="for-item"><div class="for-item-head">Ready to scale</div><div class="for-item-body">You know consistent, strategic content is the lever. You just need someone to pull it for you.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 90 DAY JOURNEY -->
+  <section class="journey">
+    <div class="journey-inner">
+      <div>
+        <div class="journey-left-h2">What changes in<br><em>90 days</em></div>
+        <p class="journey-left-sub">This isn't a sprint. It's a system that compounds. Here's what the first three months actually look like when the content strategy is running properly.</p>
+      </div>
+      <div class="journey-steps">
+        <div class="journey-step">
+          <div class="journey-dot"></div>
+          <div class="journey-month">Month 1 — Foundation</div>
+          <div class="journey-title">Your voice is captured. Your content goes live.</div>
+          <div class="journey-desc">Brand voice intake completed. Content pillars defined for your niche. First weeks of content scheduled and live. <strong>Your profile is optimised</strong> — the right person lands and immediately understands who you are and who you help. Consistency begins, often for the first time.</div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-dot"></div>
+          <div class="journey-month">Month 2 — Momentum</div>
+          <div class="journey-title">Your audience starts to warm. Enquiries begin.</div>
+          <div class="journey-desc">The story thread is building. Followers who've been watching start to comment, DM, and ask questions. <strong>The content is doing the nurturing</strong> — trust is accumulating week by week without you lifting a finger. Authority content positions you as the obvious expert in your space.</div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-dot"></div>
+          <div class="journey-month">Month 3 — Conversion</div>
+          <div class="journey-title">Your content starts closing clients.</div>
+          <div class="journey-desc">Conversion content fires. Warm followers see testimonials, offers, and clear CTAs at the right moment in their journey. <strong>People who found you 6 weeks ago</strong> are now enquiring — because the content moved them there step by step. This is what a content system looks like when it's working.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIONS -->
+  <section class="obj-section">
+    <div class="obj-inner">
+      <div>
+        <div class="obj-left-h2">Questions coaches ask</div>
+        <p class="obj-left-sub">Before you decide — here are the real ones, answered honestly. No deflection, no spin.</p>
+        <div class="obj-cta-card">
+          <div class="obj-cta-card-label">Ready to start?</div>
+          <p class="obj-cta-card-text">We work with a <strong>maximum of 3 coaches per niche + city.</strong> Once your territory is claimed, no competitor in your market gets the same system. Ever.</p>
+          <button class="obj-cta-btn" onclick="claimTerritory('Authority','$700')">Claim my territory ↗</button>
+        </div>
+      </div>
+      <div class="obj-stack">
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">
+            <div class="obj-q-text">"Will it actually sound like me?"</div>
+            <div class="obj-arrow">▼</div>
+          </div>
+          <div class="obj-a">That's exactly what the brand voice intake solves. Before a single piece of content goes live, we build a detailed picture of how you speak, what you care about, who you coach, and what you'd never say. Coaches consistently tell us their clients can't tell the difference. <strong>That's the point.</strong></div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">
+            <div class="obj-q-text">"I've tried posting consistently before and it didn't work."</div>
+            <div class="obj-arrow">▼</div>
+          </div>
+          <div class="obj-a">Posting consistently without a strategy is just noise. What didn't work wasn't consistency — it was the absence of a <strong>content story.</strong> Random posts don't build trust. A connected pillar system that moves your audience from stranger to client does. That's what we build.</div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">
+            <div class="obj-q-text">"How do I know it's actually working?"</div>
+            <div class="obj-arrow">▼</div>
+          </div>
+          <div class="obj-a">Your live dashboard shows daily activity, weekly performance, and monthly growth — reach, engagement, profile visits, enquiries. You're never guessing. <strong>You see the numbers in real time,</strong> every single day. No other social media service gives coaches this level of visibility.</div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">
+            <div class="obj-q-text">"Is $350 / $700 / $1,200 worth it?"</div>
+            <div class="obj-arrow">▼</div>
+          </div>
+          <div class="obj-a">One new client from your content each month pays for Presence three times over. One client every six weeks pays for Authority. <strong>The question isn't whether it's worth it</strong> — it's whether your current approach is generating one new client a month from social media. If it isn't, the cost of staying inconsistent is higher than the plan.</div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">
+            <div class="obj-q-text">"What if I want to change tiers later?"</div>
+            <div class="obj-arrow">▼</div>
+          </div>
+          <div class="obj-a">You can upgrade at any time. Most coaches start on Presence, see the consistency and early results, and move to Authority within 60–90 days. <strong>There's no penalty for upgrading</strong> — your territory and brand voice carry over seamlessly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <div class="final-eyebrow">Limited territories — 3 open this month</div>
+      <div class="final-h2">Your niche.<br>Your city.<br><span>Your content.</span></div>
+      <p class="final-sub">We work with a <strong>maximum of 3 coaches per niche + city.</strong> Once your territory is claimed, no competitor in your market gets the same system. Ever.</p>
+      <div class="final-btns">
+        <button class="final-btn-primary" onclick="claimTerritory('Category King/Queen','$1,200')">Claim my territory ↗</button>
+        <button class="final-btn-secondary" onclick="goPage1()">← Review the plans</button>
+      </div>
+      <div class="urgency">Territory confirmed in writing at onboarding. &nbsp;|&nbsp; <strong>3 spots open this month.</strong></div>
+    </div>
+  </section>
+
+</div><!-- /page2 -->
+
+<script>
+
+function setBilling(plan){
+  // Update button styles
+  var btns = ['monthly','2month','3month'];
+  btns.forEach(function(b){
+    var el = document.getElementById('bill-'+b);
+    if(b===plan){
+      el.style.background='#1A3608';
+      el.style.color='#B5F03C';
+    } else {
+      el.style.background='transparent';
+      el.style.color='#7A8B68';
+    }
+  });
+
+  var prices = {
+    monthly:  {presence:'$350', authority:'$700',  category:'$1,200', note:'', per:'/month'},
+    '2month': {presence:'$300', authority:'$650',  category:'$1,150', note:'Billed as 2 months · Save $100 total', per:'/month'},
+    '3month': {presence:'$250', authority:'$600',  category:'$1,100', note:'Billed as 3 months · Save $300 total', per:'/month'}
+  };
+
+  var p = prices[plan];
+  document.getElementById('price-presence').textContent = p.presence;
+  document.getElementById('price-authority').textContent = p.authority;
+  document.getElementById('price-category').textContent = p.category;
+
+  var note = document.getElementById('billing-note');
+  if(p.note){
+    note.textContent = p.note;
+    note.style.display = 'block';
+  } else {
+    note.style.display = 'none';
+  }
+}
+
+function goPage1(){
+  document.getElementById('page1').className='page active';
+  document.getElementById('page2').className='page';
+  document.getElementById('nav1').className='topnav-tab active';
+  document.getElementById('nav2').className='topnav-tab';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goPage2(){
+  document.getElementById('page1').className='page';
+  document.getElementById('page2').className='page active';
+  document.getElementById('nav1').className='topnav-tab';
+  document.getElementById('nav2').className='topnav-tab active';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleObj(header){
+  var ans = header.nextElementSibling;
+  var arrow = header.querySelector('.obj-arrow');
+  var isOpen = ans.style.display==='block';
+  // close all others
+  document.querySelectorAll('.obj-a').forEach(function(a){ a.style.display='none'; });
+  document.querySelectorAll('.obj-arrow').forEach(function(a){ a.style.transform='rotate(0deg)'; });
+  if(!isOpen){
+    ans.style.display='block';
+    arrow.style.transform='rotate(180deg)';
+  }
+}
+</script>
+
+<!-- ── TERRITORY CLAIM OVERLAY ── -->
+<div id="claimOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.65);z-index:9000;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--deep);border-radius:16px;max-width:520px;width:100%;border:1px solid rgba(181,240,60,.25);overflow:hidden;max-height:90vh;overflow-y:auto">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#0F2208,#1E3A0D);padding:24px 24px 20px;border-bottom:1px solid rgba(181,240,60,.15)">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(181,240,60,.5);margin-bottom:6px">Territory Claim</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--white);line-height:1">Lock in your niche.<br><span style="color:var(--lime)">Before someone else does.</span></div>
+    </div>
+
+    <!-- Selected tier display -->
+    <div style="padding:16px 24px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:10px;color:var(--cardmuted);margin-bottom:2px">Selected plan</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--lime)" id="claimTierName">Authority</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--white)" id="claimTierPrice">$700</div>
+        <div style="font-size:10px;color:var(--cardmuted)">/month</div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div style="padding:22px 24px">
+      <div style="font-size:12px;color:var(--cardmuted);line-height:1.65;margin-bottom:20px">Fill in your details — we'll copy a message for you to send directly to our Instagram DM. We confirm your territory is available within <strong style="color:var(--white)">24 hours</strong>.</div>
+
+      <div style="margin-bottom:14px">
+        <label style="font-size:10px;font-weight:700;color:var(--cardmuted);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:6px">Email address</label>
+        <input type="email" id="claim-email" placeholder="you@email.com" style="width:100%;padding:12px 14px;border:1px solid rgba(255,255,255,.12);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--white);background:rgba(255,255,255,.06);outline:none;box-sizing:border-box">
+      </div>
+
+      <div style="margin-bottom:14px">
+        <label style="font-size:10px;font-weight:700;color:var(--cardmuted);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:6px">Most active social platform</label>
+        <select id="claim-platform" style="width:100%;padding:12px 14px;border:1px solid rgba(255,255,255,.12);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--white);background:#1A2C00;outline:none;box-sizing:border-box;cursor:pointer">
+          <option value="Instagram">Instagram</option>
+          <option value="TikTok">TikTok</option>
+          <option value="Twitter/X">Twitter / X</option>
+          <option value="YouTube">YouTube</option>
+          <option value="Facebook">Facebook</option>
+          <option value="LinkedIn">LinkedIn</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:20px">
+        <label style="font-size:10px;font-weight:700;color:var(--cardmuted);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:6px">Your handle on that platform</label>
+        <div style="display:flex;align-items:center;border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden">
+          <span style="padding:12px 12px;font-size:13px;color:var(--cardmuted);border-right:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)">@</span>
+          <input type="text" id="claim-handle" placeholder="yourhandle" style="flex:1;padding:12px 14px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--white);outline:none">
+        </div>
+      </div>
+
+      <div id="claim-error" style="display:none;font-size:11px;color:#FC8181;margin-bottom:12px;padding:10px 14px;background:rgba(252,129,129,.08);border-radius:8px;border:1px solid rgba(252,129,129,.2)">Please fill in your email and social handle before continuing.</div>
+
+      <button onclick="submitClaim()" style="width:100%;background:#B5F03C;color:#0F2208;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;padding:15px;border:none;border-radius:8px;cursor:pointer;letter-spacing:.04em;margin-bottom:10px">Get my claim message ↗</button>
+      <button onclick="closeClaimOverlay()" style="width:100%;background:transparent;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;font-size:12px;padding:10px;border:none;cursor:pointer">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DM POPUP ── -->
+<div id="dmPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--deep);border-radius:16px;padding:26px;max-width:500px;width:100%;border:1px solid rgba(181,240,60,.25)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--lime);margin-bottom:4px">Send this on Instagram DM</div>
+    <div style="font-size:12px;color:var(--cardmuted);margin-bottom:16px;line-height:1.6">Copy the message below, then tap "Open Instagram DM" to paste it to us directly.</div>
+    <div id="dmPopupMsg" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px;font-size:12px;color:var(--white);line-height:1.8;white-space:pre-wrap;margin-bottom:16px"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button id="copyBtn" onclick="copyDmMsg()" style="flex:1;background:#B5F03C;color:#0F2208;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:800;padding:13px;border:none;border-radius:8px;cursor:pointer;letter-spacing:.04em">Copy message</button>
+      <button onclick="openIgDm()" style="flex:1;background:transparent;color:var(--lime);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;padding:13px;border:1px solid rgba(181,240,60,.4);border-radius:8px;cursor:pointer;letter-spacing:.04em">Open Instagram DM ↗</button>
+    </div>
+    <button onclick="closeDmPopup()" style="width:100%;margin-top:10px;background:transparent;color:rgba(255,255,255,.25);font-family:'DM Sans',sans-serif;font-size:11px;padding:8px;border:none;cursor:pointer">Cancel</button>
+  </div>
+</div>
+
+<!-- ── CONFIRMATION PAGE ── -->
+<div id="confirmPage" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--deep);z-index:8000;overflow-y:auto">
+  <div style="max-width:540px;margin:0 auto;padding:40px 24px">
+    <div style="text-align:center;margin-bottom:28px">
+      <div style="font-size:48px;margin-bottom:14px">✅</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--lime);margin-bottom:6px">You're in.</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--white);margin-bottom:10px" id="confirmTierDisplay">Authority — $700/month</div>
+      <div style="font-size:13px;color:var(--cardmuted);line-height:1.7">Your claim message has been sent to the FitFluxStudio team via Instagram DM. We'll confirm your territory is available and send your invoice within <strong style="color:var(--white)">24 hours.</strong></div>
+    </div>
+
+    <div style="border:1px solid var(--cardborder);border-radius:14px;overflow:hidden;margin-bottom:24px">
+      <div style="background:rgba(255,255,255,.04);padding:12px 18px;border-bottom:1px solid var(--cardborder)">
+        <div style="font-size:11px;font-weight:700;color:var(--white)">What happens next</div>
+      </div>
+      <div>
+        <div style="display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--cardborder);align-items:flex-start">
+          <div style="width:24px;height:24px;border-radius:50%;background:#B5F03C;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:14px;color:#0F2208;flex-shrink:0">1</div>
+          <div><div style="font-size:12px;font-weight:700;color:var(--white);margin-bottom:2px">Team confirms your territory</div><div style="font-size:11px;color:var(--cardmuted)">We verify your niche + city is available and no other coach is running it.</div></div>
+        </div>
+        <div style="display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--cardborder);align-items:flex-start">
+          <div style="width:24px;height:24px;border-radius:50%;background:#B5F03C;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:14px;color:#0F2208;flex-shrink:0">2</div>
+          <div><div style="font-size:12px;font-weight:700;color:var(--white);margin-bottom:2px">Invoice sent to your email</div><div style="font-size:11px;color:var(--cardmuted)">Clean invoice with your tier, territory, deliverables, and terms in writing.</div></div>
+        </div>
+        <div style="display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--cardborder);align-items:flex-start">
+          <div style="width:24px;height:24px;border-radius:50%;background:#B5F03C;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:14px;color:#0F2208;flex-shrink:0">3</div>
+          <div><div style="font-size:12px;font-weight:700;color:var(--white);margin-bottom:2px">Payment received — content starts</div><div style="font-size:11px;color:var(--cardmuted)">The moment payment clears, your content build begins. First posts go live within the first week.</div></div>
+        </div>
+        <div style="display:flex;gap:14px;padding:14px 18px;align-items:flex-start">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--dg);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--lime);flex-shrink:0">4</div>
+          <div><div style="font-size:12px;font-weight:700;color:var(--white);margin-bottom:2px">Month 3 — content converting clients</div><div style="font-size:11px;color:var(--cardmuted)">Your content story is fully built. Warm followers are converting. Your territory is locked. No competitor in your niche + city gets the same system.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="closeConfirm()" style="width:100%;background:rgba(181,240,60,.12);color:#B5F03C;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;padding:14px;border:none;border-radius:8px;cursor:pointer;letter-spacing:.04em">← Back to the page</button>
+  </div>
+</div>
+
+<script>
+var _claimTier = '', _claimPrice = '';
+
+function claimTerritory(tier, price){
+  _claimTier = tier; _claimPrice = price;
+  document.getElementById('claimTierName').textContent = tier;
+  document.getElementById('claimTierPrice').textContent = price;
+  var overlay = document.getElementById('claimOverlay');
+  overlay.style.display = 'flex';
+}
+function closeClaimOverlay(){
+  document.getElementById('claimOverlay').style.display = 'none';
+}
+function submitClaim(){
+  var email   = document.getElementById('claim-email').value.trim();
+  var platform = document.getElementById('claim-platform').value;
+  var handle  = document.getElementById('claim-handle').value.trim().replace(/^@/,'');
+  var errEl   = document.getElementById('claim-error');
+  if(!email || !handle || !email.includes('@')){
+    errEl.style.display = 'block'; return;
+  }
+  errEl.style.display = 'none';
+  var msg = 'Hi FitFluxStudio! I want to claim my territory.\n\nPlan: ' + _claimTier + ' — ' + _claimPrice + '/month\nEmail: ' + email + '\n' + platform + ': @' + handle + '\n\nPlease confirm my territory is available and send me the invoice.';
+  document.getElementById('dmPopupMsg').textContent = msg;
+  document.getElementById('claimOverlay').style.display = 'none';
+  var popup = document.getElementById('dmPopup');
+  popup.style.display = 'flex';
+  document.getElementById('confirmTierDisplay').textContent = _claimTier + ' — ' + _claimPrice + '/month';
+}
+function copyDmMsg(){
+  var txt = document.getElementById('dmPopupMsg').textContent;
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt); }
+  else { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }
+  var btn = document.getElementById('copyBtn');
+  btn.textContent = 'Copied ✓';
+  btn.style.background = '#4CAF82';
+  setTimeout(function(){ btn.textContent = 'Copy message'; btn.style.background = 'var(--lime)'; }, 2000);
+}
+function openIgDm(){
+  document.getElementById('dmPopup').style.display = 'none';
+  document.getElementById('confirmPage').style.display = 'block';
+  window.scrollTo(0,0);
+  window.open('https://ig.me/m/fitflux_studio','_blank');
+}
+function closeDmPopup(){
+  document.getElementById('dmPopup').style.display = 'none';
+}
+function closeConfirm(){
+  document.getElementById('confirmPage').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
