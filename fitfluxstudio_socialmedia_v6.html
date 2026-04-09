@@ -465,14 +465,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep);ov
         <div class="tiers-sub">Every tier includes territory exclusivity — your niche + city locked in writing. Max 3 coaches per territory, ever.</div>
       </div>
       <!-- BILLING TOGGLE -->
-      <div style="display:flex;justify-content:center;margin-bottom:40px">
-        <div style="background:#F0F4E8;border:1px solid var(--border);border-radius:60px;padding:6px;display:inline-flex;gap:6px">
-          <button id="bill-monthly" onclick="setBilling('monthly')" style="background:#1E3A0D;color:#B5F03C;border:none;border-radius:50px;padding:14px 32px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.04em;transition:all .2s">Monthly</button>
-          <button id="bill-2month" onclick="setBilling('2month')" style="background:transparent;color:var(--muted);border:none;border-radius:50px;padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.04em;transition:all .2s;display:flex;align-items:center;gap:8px">
-            2 Months <span style="background:#2E9E6A;color:#fff;font-size:10px;padding:3px 9px;border-radius:8px;font-weight:800;flex-shrink:0">SAVE $100</span>
+      <div style="display:flex;justify-content:center;margin-bottom:40px;padding:0 16px">
+        <div style="background:#F0F4E8;border:1px solid var(--border);border-radius:60px;padding:5px;display:flex;gap:4px;width:100%;max-width:480px">
+          <button id="bill-monthly" onclick="setBilling('monthly')" style="background:#1E3A0D;color:#B5F03C;border:none;border-radius:50px;padding:11px clamp(10px,3vw,28px);font-family:'DM Sans',sans-serif;font-size:clamp(11px,3.2vw,14px);font-weight:800;cursor:pointer;letter-spacing:.03em;transition:all .2s;flex:1">Monthly</button>
+          <button id="bill-2month" onclick="setBilling('2month')" style="background:transparent;color:var(--muted);border:none;border-radius:50px;padding:11px clamp(6px,2.5vw,20px);font-family:'DM Sans',sans-serif;font-size:clamp(11px,3.2vw,14px);font-weight:800;cursor:pointer;letter-spacing:.03em;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:5px;flex:1">
+            2 Months <span style="background:#2E9E6A;color:#fff;font-size:9px;padding:2px 6px;border-radius:6px;font-weight:800;flex-shrink:0;white-space:nowrap">SAVE $100</span>
           </button>
-          <button id="bill-3month" onclick="setBilling('3month')" style="background:transparent;color:var(--muted);border:none;border-radius:50px;padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.04em;transition:all .2s;display:flex;align-items:center;gap:8px">
-            3 Months <span style="background:#A8E030;color:#0F2208;font-size:10px;padding:3px 9px;border-radius:8px;font-weight:800;flex-shrink:0">SAVE $300</span>
+          <button id="bill-3month" onclick="setBilling('3month')" style="background:transparent;color:var(--muted);border:none;border-radius:50px;padding:11px clamp(6px,2.5vw,20px);font-family:'DM Sans',sans-serif;font-size:clamp(11px,3.2vw,14px);font-weight:800;cursor:pointer;letter-spacing:.03em;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:5px;flex:1">
+            3 Months <span style="background:#A8E030;color:#0F2208;font-size:9px;padding:2px 6px;border-radius:6px;font-weight:800;flex-shrink:0;white-space:nowrap">SAVE $300</span>
           </button>
         </div>
       </div>
