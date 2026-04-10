@@ -3,6 +3,15 @@
 :root{--lime:#CCFF00;--dg:#2D6A0F;--deep:#0D1F00;--white:#fff;--off:#F4F8EE;--muted:#6B7A5A;--border:#DDE8CC;--card:#101C00;--cardtext:#D4E8B0;--cardmuted:#9BAA88;--cardborder:#1A2C00}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
+
+/* ── OPTION-B SECTION TOGGLE ── */
+.sec-toggle-wrap{border:1.5px solid var(--border);border-radius:12px;padding:16px 18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--white);margin:0 0 3px;transition:border-color .18s,box-shadow .18s;user-select:none}
+.sec-toggle-wrap:hover{border-color:var(--lime);box-shadow:0 0 0 3px rgba(204,255,0,.08)}
+.sec-toggle-summary{font-size:13px;font-weight:700;color:var(--deep);line-height:1.55;flex:1}
+.sec-toggle-pill{background:var(--lime);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;padding:7px 14px;border-radius:30px;white-space:nowrap;flex-shrink:0;letter-spacing:.02em;transition:background .15s}
+.sec-toggle-wrap:hover .sec-toggle-pill{background:#b8e800}
+.sec-toggle-body{display:none;margin-top:0;padding-top:16px}
+.sec-toggle-body.open{display:block}
 .deck{max-width:1100px;margin:0 auto;width:100%}
 
 .hero{background:var(--deep);padding:40px clamp(20px,5vw,72px) 36px;margin-bottom:3px}
@@ -253,7 +262,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
 .proj-page.active{display:block}
 .main-deck.hidden{display:none}
 
-@media(max-width:640px){
+@media(min-width:900px){
+  .three{flex-direction:row}
+  .obj-stack{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .layer{padding:4px 0}
+}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:768px){
+  /* Bridge section 3-card grid → single column */
+  .bridge-cards{grid-template-columns:1fr!important}
+  
+  /* Grids */
   .stats{grid-template-columns:1fr 1fr}
   .personas{grid-template-columns:1fr 1fr}
   .vs{grid-template-columns:1fr}
@@ -262,39 +282,231 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
   .g-phases{grid-template-columns:1fr 1fr}
   .tiers{grid-template-columns:1fr}
   #sideBySide{grid-template-columns:1fr!important}
-  .hero-h1{font-size:clamp(28px,9vw,38px)}
-  .hero{padding:32px 20px 28px}
-  .hero-sub{font-size:12px}
-  .s{padding:22px 20px}
-  .divider{padding:10px 20px}
-  .offers-wrap{padding:22px 20px}
-  .cta-slide{padding:28px 20px}
-  .cta-h2{font-size:32px}
+
+  /* Hero */
+  .hero{padding:24px 18px 22px}
+  .hero-h1{font-size:clamp(30px,9vw,42px)}
+  .hero-sub{font-size:12px;max-width:100%}
+
+  /* Section 3-col grids inside insight/categorical → stack */
+  .insight-body [style*="grid-template-columns:1fr 1fr 1fr"],
+  [style*="grid-template-columns:repeat(3"]{
+    grid-template-columns:1fr!important
+  }
+  /* Section 2-col grids → stack on mobile */
+  .insight-body [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns:1fr 1fr"]:not(.stats):not(.offers-grid):not(.wg):not(.vs):not(.personas):not(.g-phases){
+    grid-template-columns:1fr!important
+  }
+
+  /* Sections */
+  .s{padding:20px 18px}
+  .divider{padding:10px 18px}
+  .offers-wrap{padding:20px 18px}
+  .cold-wrap{padding:20px 18px}
+  .cta-slide{padding:24px 18px}
+
+  /* Typography */
+  .cta-h2{font-size:28px}
+  .h2{font-size:24px}
+  .h2-large{font-size:26px}
+  .win-line1{font-size:30px}
+  .win-line2{font-size:34px}
+  .cold-h1{font-size:26px}
+  .cold-h2{font-size:30px}
+
+  /* Buttons */
   .cta-acts{flex-direction:column}
   .btn-primary,.btn-secondary{width:100%;text-align:center}
+
+  /* Revenue comparison */
   .rev{grid-template-columns:1fr;display:flex;flex-direction:column;gap:8px}
   .rm{display:none}
-  .g-phases{grid-template-columns:1fr 1fr}
-  .h2-large{font-size:28px}
-  .win-line1{font-size:32px}
-  .win-line2{font-size:36px}
+
+  /* Toggle pills */
+  .sec-toggle-wrap{flex-direction:column;align-items:flex-start;gap:8px;padding:14px 16px}
+  .sec-toggle-pill{align-self:flex-end}
+
+  /* Tier cards */
+  .tier{margin-bottom:2px}
+  .tiers{gap:8px}
+
+  /* Phase rows */
+  .phase-row{grid-template-columns:1fr auto;gap:6px}
+  .prw{display:none}
+
+  /* G-phases */
+  .g-phases{gap:6px}
+  .gp-num{font-size:18px}
+
+  /* Personas */
+  .persona{padding:10px 10px}
+
+  /* Offer cards */
+  .offer-card{margin-bottom:0}
+
+  /* CTA buttons */
+  .cta-acts button{font-size:11px;padding:12px 16px}
 }
-@media(max-width:400px){
+
+@media(max-width:480px){
+  /* Hero stats → 2 col */
+  .stats{grid-template-columns:1fr 1fr}
+
+  /* Hero type */
+  .hero-h1{font-size:clamp(28px,10vw,36px)}
+  .hero-sub{font-size:11px}
+  .bn{font-size:18px}
+
+  /* Bridge section cards (inline style override) */
+  div[style*="grid-template-columns:repeat(3,1fr)"]{
+    grid-template-columns:1fr!important;display:grid!important
+  }
+
+  /* Fix cc-table on small screens */
+  .cc-table{font-size:9px}
+  .cc-table th,.cc-table td{padding:7px 8px}
+  .cc-table td:first-child{font-size:9px}
+
+  /* Win heading */
+  .win-line1{font-size:26px}
+  .win-line2{font-size:30px}
+
+  /* h2 large */
+  .h2-large{font-size:22px}
+  .h2{font-size:20px}
+
+  /* Tiers */
+  .tier-price{font-size:24px}
+  .tier-name{font-size:17px}
+
+  /* CTA */
+  .cta-h2{font-size:24px}
+
+  /* Cold section */
+  .cold-h1{font-size:22px}
+  .cold-h2{font-size:26px}
+
+  /* Offers grid */
+  .offers-grid{grid-template-columns:1fr}
+
+  /* Flow diagram 3-col → 1 col */
+  div[style*="grid-template-columns:1fr 1fr 1fr"]{
+    grid-template-columns:1fr!important;display:grid!important
+  }
+
+  /* remove border-right on inline 3-col cells */
+  div[style*="border-right:1px solid var(--border)"]{
+    border-right:none!important;border-bottom:1px solid var(--border)
+  }
+
+  /* personas */
+  .personas{grid-template-columns:1fr 1fr}
+
+  /* Phase rows hide 3rd col */
+  .phase-row{grid-template-columns:1fr auto}
+
+  /* Guarantee phases */
+  .g-phases{grid-template-columns:1fr 1fr}
+
+  /* Top tag text */
+  div[style*="font-size:13px"][style*="letter-spacing:.14em"]{
+    font-size:10px!important
+  }
+}
+
+@media(max-width:380px){
   .stats{grid-template-columns:1fr}
   .personas{grid-template-columns:1fr}
   .g-phases{grid-template-columns:1fr}
+  .hero-h1{font-size:26px}
+  .h2-large{font-size:20px}
+  .win-line1{font-size:22px}
+  .win-line2{font-size:26px}
 }
-@media(min-width:900px){
-  .three{flex-direction:row}
-  .obj-stack{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .layer{padding:4px 0}
+
+/* ── TABLE OVERFLOW ON MOBILE ── */
+.cc-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* ── RAMP TIMELINE MOBILE ── */
+@media(max-width:520px){
+  .ramp-timeline{flex-direction:column!important}
+  .ramp-timeline > div{border-right:none!important;border-bottom:1px solid rgba(255,255,255,.07)}
+  .ramp-timeline > div:last-child{border-bottom:none}
+}
+
+/* ── GUARANTEE TOGGLE HEADER MOBILE ── */
+@media(max-width:520px){
+  .gbox > div:first-child{flex-wrap:wrap}
+  #guarantee-pill{align-self:flex-end;font-size:10px;padding:6px 12px}
+}
+
+/* ── PHASE ROW MOBILE ── */
+@media(max-width:480px){
+  .phase-row{grid-template-columns:1fr auto!important}
+  .prw{display:none!important}
+  .ads-row .prs{font-size:10px}
+}
+
+/* ── COLD WRAP TABLE ── */
+@media(max-width:520px){
+  .cold-wrap .cc-table-wrap{margin:0 -6px}
+}
+
+@media(max-width:600px){
+  .bridge-section{border-radius:0!important;margin-left:0!important;margin-right:0!important}
+}
+
+/* ── FLOW DIAGRAM 3-COL → COLUMN ON MOBILE ── */
+@media(max-width:480px){
+  .flow-diagram-3col{display:flex!important;flex-direction:column!important}
+  .flow-diagram-3col > div{border-right:none!important;border-bottom:1px solid var(--border)}
+  .flow-diagram-3col > div:last-child{border-bottom:none}
+}
+
+/* ── PROJECTION + CALCULATOR PAGE ── */
+@media(max-width:520px){
+  /* Proj sticky bar */
+  .proj-page > div:first-child{padding:8px 16px!important}
+  /* The difference grid */
+  .proj-page [style*="grid-template-columns:1fr 1fr;gap:14px"]{grid-template-columns:1fr!important}
+  /* Loss stats */
+  .proj-page [style*="grid-template-columns:1fr 1fr;gap:12px"]{grid-template-columns:1fr!important}
+  /* 3-col results in opp calculator */
+  #oppResult2 .bridge-cards{grid-template-columns:1fr 1fr!important}
+}
+
+/* ── TOP TAG OVERFLOW FIX ── */
+@media(max-width:480px){
+  .main-deck > div:first-child span{font-size:10px!important;letter-spacing:.08em!important}
+  .main-deck > div:first-child{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+}
+
+/* ── DM POPUP MOBILE ── */
+@media(max-width:480px){
+  #dmPopup > div{padding:18px 16px!important;margin:12px!important;max-width:100%!important}
+  #dmPopup > div [style*="gap:10px"]{flex-direction:column!important}
+  #dmPopup > div button{width:100%!important}
+}
+
+/* ── CTA SECTION MOBILE ── */
+@media(max-width:480px){
+  .cta-slide .cta-h2{font-size:24px!important}
+  .cta-sub{font-size:11px}
+}
+
+/* ── OFFERS SECTION MOBILE ── */
+@media(max-width:480px){
+  .offer-card-header{padding:11px 13px 9px}
+  .offer-card-body{padding:9px 13px}
+  .offer-card-footer{padding:9px 13px}
 }
 </style>
 
 <div class="deck main-deck" id="mainDeck">
 
 <!-- TOP TAG -->
-<div style="background:var(--lime);padding:8px clamp(20px,5vw,72px);display:flex;align-items:center;gap:8px">
+<div style="background:var(--lime);padding:8px clamp(16px,5vw,72px);display:flex;align-items:center;gap:8px;overflow:hidden">
   <span style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.14em;color:var(--deep)">Social Media Management · Marketing &amp; Sales Offer</span>
 </div>
 
@@ -303,7 +515,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
   <div class="logo-row"><div class="lm"><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div></div><div class="bn">FitfluxStudio</div></div>
   <div class="hero-eyebrow">For personal coaches &amp; fitness professionals</div>
   <div class="hero-h1">The biggest mistake<br><span>killing your</span><br>revenue.</div>
-  <div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:26px;line-height:1.1;color:#AAB899;margin-bottom:12px;letter-spacing:-.01em">Stop selling one offer<br>to everyone.</div>
+  <div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:clamp(18px,5vw,26px);line-height:1.1;color:#AAB899;margin-bottom:12px;letter-spacing:-.01em">Stop selling one offer<br>to everyone.</div>
   <div class="hero-sub">The Peak Performance Client Engine™ is built to attract, segment, and convert clients into the categorical offer built specifically for them. More revenue. Same or more traffic. Zero extra ad spend.</div>
   <div class="stats">
     <div class="stat"><div class="sn">3×</div><div class="sl">Offers running at once | 3× more ways to earn — so more leads turn into paying clients</div></div>
@@ -313,9 +525,67 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
   </div>
 </div>
 
+<!-- BRIDGE SECTION — What this actually is -->
+<div class="bridge-section" style="margin:0 clamp(0px,3vw,48px) 8px;padding:28px clamp(18px,5vw,26px);background:#0D1F00;border:1px solid rgba(204,255,0,.12);border-radius:clamp(0px,2vw,14px)">
+
+  <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(204,255,0,.5);margin-bottom:6px">What this actually is</div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,4vw,30px);color:#fff;margin-bottom:6px;letter-spacing:.04em;line-height:1.1">We build you a client engine.<br>It runs. You coach.</div>
+  <div style="font-size:12px;color:#6B7A5A;margin-bottom:20px;line-height:1.65;max-width:560px">We create categorical offers for you. We route the right lead to the right offer automatically — so every person who finds you feels like the offer was made for them.</div>
+
+  <div style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.18);margin-bottom:12px">Three things we handle. One system that runs it.</div>
+
+  <div class="bridge-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">
+    <div style="background:rgba(204,255,0,.06);border:1px solid rgba(204,255,0,.14);border-radius:10px;padding:14px 13px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#CCFF00;margin-bottom:4px">01</div>
+      <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:5px">Attract</div>
+      <div style="font-size:10px;color:#6B7A5A;line-height:1.55">Ads + content that pull the right client in — not just anyone</div>
+    </div>
+    <div style="background:rgba(204,255,0,.06);border:1px solid rgba(204,255,0,.14);border-radius:10px;padding:14px 13px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#CCFF00;margin-bottom:4px">02</div>
+      <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:5px">Segment</div>
+      <div style="font-size:10px;color:#6B7A5A;line-height:1.55">System reads who they are and routes them to the right offer automatically</div>
+    </div>
+    <div style="background:rgba(204,255,0,.06);border:1px solid rgba(204,255,0,.14);border-radius:10px;padding:14px 13px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#CCFF00;margin-bottom:4px">03</div>
+      <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:5px">Convert</div>
+      <div style="font-size:10px;color:#6B7A5A;line-height:1.55">They land on an offer built for exactly them. Close rate goes up.</div>
+    </div>
+  </div>
+
+  <div style="height:1px;background:rgba(255,255,255,.07);margin-bottom:16px"></div>
+
+  <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:18px">
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <span style="color:#CCFF00;font-size:13px;flex-shrink:0;margin-top:1px">✓</span>
+      <span style="font-size:11px;color:#AAB899;line-height:1.55">Ads + content strategy built for your specific niche</span>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <span style="color:#CCFF00;font-size:13px;flex-shrink:0;margin-top:1px">✓</span>
+      <span style="font-size:11px;color:#AAB899;line-height:1.55">Categorical offers created for you — each matched to a specific client identity</span>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <span style="color:#CCFF00;font-size:13px;flex-shrink:0;margin-top:1px">✓</span>
+      <span style="font-size:11px;color:#AAB899;line-height:1.55">Pre-built offer pages, sequences, and creative — already done for you</span>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <span style="color:#CCFF00;font-size:13px;flex-shrink:0;margin-top:1px">✓</span>
+      <span style="font-size:11px;color:#AAB899;line-height:1.55">5–15 new enrolled clients per month by Month 3 — or we keep working free</span>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:10px;align-items:center">
+    <div style="flex:1;height:1px;background:rgba(255,255,255,.07)"></div>
+    <div style="font-size:9px;color:rgba(204,255,0,.45);font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap">Now let's show you exactly how ↓</div>
+    <div style="flex:1;height:1px;background:rgba(255,255,255,.07)"></div>
+  </div>
+</div>
+
 <!-- 1. THE PROBLEM -->
-<div class="divider"><div class="dl">The problem</div><div class="dr"></div></div>
-<div class="s">
+<div class="sec-toggle-wrap" onclick="secToggle('problem-body', this)" style="margin:0 0 3px">
+  <div class="sec-toggle-summary">The Problem — You're getting leads but sending everyone to the same offer. That mismatch is the ceiling killing your revenue.</div>
+  <div class="sec-toggle-pill" id="problem-pill">Full detail ▼</div>
+</div>
+<div class="s sec-toggle-body" id="problem-body">
 
   <!-- Problem 1 -->
   <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:6px">
@@ -345,13 +615,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
       <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;font-size:11px"><span style="color:#FF4444;font-weight:700;flex-shrink:0">✕</span><span style="color:rgba(255,255,255,.65);text-decoration:line-through;text-decoration-color:rgba(255,0,0,.4);line-height:1.5">Revenue stops the moment you stop prospecting</span></div>
     </div>
   </div>
+  </div><!-- end problem-body toggle -->
 
 </div>
 
 <!-- 3. THE INSIGHT & THE SOLUTION -->
-<div class="divider"><div class="dl">The insight &amp; the solution</div><div class="dr"></div></div>
-<div class="s">
-  <div class="h2">The fix is simple:<br><em>route people to the right offer</em></div>
+<div class="sec-toggle-wrap" onclick="secToggle('insight-body', this)" style="margin:0 0 3px">
+  <div class="sec-toggle-summary">The Insight — Your system already knows who each lead is. The fix is routing them to an offer built for exactly that person — so they feel found, not sold to.</div>
+  <div class="sec-toggle-pill" id="insight-pill">Full detail ▼</div>
+</div>
+<div class="s sec-toggle-body" id="insight-body">
+
+  <div class="h2" style="margin-top:16px">The fix is simple:<br><em>route people to the right offer</em></div>
 
   <div class="sb" style="margin-bottom:20px;border-left-color:var(--lime);background:var(--off)">This is what we call the <strong>categorical offer model</strong> — our unique approach. Instead of one generic offer for everyone, a coach runs 1, 2, or 3 offers, each built for a specific type of person. Each offer speaks their language, names their dream outcome, and addresses their exact hesitations. <strong>The prospect doesn't feel sold to. They feel found.</strong></div>
 
@@ -396,6 +671,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
       <div style="height:1px;flex:1;background:linear-gradient(to left,var(--lime),transparent)"></div>
     </div>
     <div style="background:var(--deep);border:1px solid rgba(204,255,0,.2);border-top:none;border-radius:0 0 14px 14px;padding:20px 18px;box-shadow:0 8px 32px rgba(0,0,0,.25)">
+      <div class="cc-table-wrap">
       <table class="cc-table" style="margin-bottom:14px">
         <thead><tr><th></th><th class="bad">Cold Calling</th><th class="good">Peak Performance CAS</th></tr></thead>
         <tbody>
@@ -408,6 +684,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
           <tr><td>Close rate</td><td class="bad-val">Low — cold leads resist</td><td class="good-val">High — client already wants it</td></tr>
         </tbody>
       </table>
+      </div><!-- /cc-table-wrap -->
       <div class="verdict-box" style="margin-bottom:0"><div class="verdict-label">The verdict</div><div class="verdict-text">Cold calling is a job.<br>The Peak Performance Client Engine™ is a business.</div></div>
     </div>
   </div>
@@ -437,7 +714,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
       </div>
 
       <!-- 3 Offers -->
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--white)">
+      <div class="flow-diagram-3col" style="display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--white)">
         <div style="padding:12px 10px;border-right:1px solid var(--border);text-align:center">
           <div style="font-size:16px;margin-bottom:5px">👔</div>
           <div style="font-size:10px;font-weight:700;color:#3C3489;margin-bottom:2px">Premium</div>
@@ -550,11 +827,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
     </div>
   </div>
 
+  </div><!-- end insight-body toggle -->
+
 </div>
 
 <!-- 4. THE CATEGORICAL OFFER INFRASTRUCTURE -->
-<div class="divider"><div class="dl">The categorical offer infrastructure</div><div class="dr"></div></div>
-<div class="offers-wrap">
+<div class="sec-toggle-wrap" onclick="secToggle('categorical-body', this)" style="margin:0 0 3px">
+  <div class="sec-toggle-summary">The Categorical Offer — A library of pre-built, identity-matched offers — each with its own sales page, ad creative, and sequences — ready to deploy.</div>
+  <div class="sec-toggle-pill" id="categorical-pill">Full detail ▼</div>
+</div>
+<div class="offers-wrap sec-toggle-body" id="categorical-body">
+
   <div class="offers-intro-h">The kinds of offers our categorical infrastructure creates</div>
   <div class="offers-intro-body">Every coach chooses 1 to 3 categorical offers or more that match who they most want to serve. The CAS targets, attracts, and routes the right clients into those specific offers automatically. Each offer below comes with its own fully built sales page, sequences, ad creative, and discovery call framework — unlocked once you are onboarded.</div>
   <div class="offers-fade" id="offersContainer">
@@ -576,12 +859,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
     <div class="offers-fade-overlay" id="fadeOverlay"></div>
   </div>
   <div class="see-more-wrap" id="seeMoreWrap"><button class="see-more-btn" onclick="expandOffers()">See all offer categories ↓</button></div>
+
+  </div><!-- end categorical-body toggle -->
 </div>
 
 <!-- 5. WHAT WE BUILD -->
-<div class="divider"><div class="dl">What we build and handle for you</div><div class="dr"></div></div>
-<div class="s">
-  <div class="h2">Everything built.<br><em>Nothing for you to manage.</em></div>
+<div class="sec-toggle-wrap" onclick="secToggle('build-body', this)" style="margin:0 0 3px">
+  <div class="sec-toggle-summary">What We Build — We handle content, leads, offers, routing, follow-up — so you can focus entirely on coaching.</div>
+  <div class="sec-toggle-pill" id="build-pill">Full detail ▼</div>
+</div>
+<div class="s sec-toggle-body" id="build-body">
+
+  <div class="h2" style="margin-top:16px">Everything built.<br><em>Nothing for you to manage.</em></div>
   <div class="intro">FitStudio doesn't hand you a strategy and wish you luck. We build and install the entire system, the traffic engine, the categorical offer infrastructure, and the routing layer, then run it for you — while you focus on your coaching responsibilities and hands-on client experience. <strong>We are your marketing and sales partner.</strong></div>
   <div style="font-size:13px;font-weight:700;color:var(--deep);margin-bottom:12px">The Peak Performance Client Engine™ — v2<br><span style="font-size:11px;font-weight:400;color:var(--muted)">The original 5-layer infrastructure</span></div>
   <style>
@@ -868,6 +1157,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
     <div class="wc"><div class="wc-title"><div class="wc-dot"></div>Premium clarity session framework <span style="font-size:9px;background:rgba(204,255,0,.15);color:var(--dg);padding:1px 6px;border-radius:8px;margin-left:4px">Pro tier only</span></div><div class="wc-body">For coaches running $3,000+ categorical offers, a structured framework to guide the final premium enrollment conversation — not a cold call, an elite close</div></div>
   </div>
   </div><!-- end producesBody -->
+  </div><!-- end build-body toggle -->
 </div>
 
 <!-- 7. INVESTMENT -->
@@ -904,18 +1194,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
 
   <!-- GUARANTEE -->
   <div class="gbox" style="flex-direction:column;gap:0">
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+    <!-- Toggle summary row — dark styled to match gbox background -->
+    <div style="display:flex;align-items:center;gap:14px;cursor:pointer;padding:4px 0" onclick="secToggle('guarantee-body', this)">
       <div class="gi">G</div>
-      <div>
+      <div style="flex:1">
         <div class="gt">The Peak Performance Guarantee™</div>
         <div class="gd" style="margin-top:2px">We don't promise the same number from day one. We promise a system that ramps correctly and compounds.</div>
       </div>
+      <div id="guarantee-pill" style="flex-shrink:0;background:var(--lime);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;padding:7px 14px;border-radius:30px;white-space:nowrap;letter-spacing:.02em;transition:background .15s;cursor:pointer">Full detail ▼</div>
     </div>
+
+    <!-- Collapsible body -->
+    <div id="guarantee-body" class="sec-toggle-body" style="margin-top:18px">
 
     <!-- Ramp timeline -->
     <div style="margin-bottom:20px">
       <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(204,255,0,.5);margin-bottom:10px">The ramp — what to expect each month</div>
-      <div style="display:flex;align-items:stretch;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08)">
+      <div class="ramp-timeline" style="display:flex;align-items:stretch;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08)">
         <div style="flex:1;padding:14px 12px;background:rgba(204,255,0,.04);border-right:1px solid rgba(255,255,255,.07)">
           <div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(204,255,0,.45);margin-bottom:6px">Month 1</div>
           <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--lime);line-height:1;margin-bottom:4px">1–5</div>
@@ -1005,7 +1300,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
         </div>
       </div>
     </div>
-  </div>
+  </div><!-- end toggle-body -->
+  </div><!-- end gbox -->
 
   <!-- Tiers -->
   <div class="tiers-label">Choose your setup tier</div>
@@ -1444,7 +1740,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
 
 <style>@media(max-width:640px){#sideBySide{grid-template-columns:1fr!important}}</style>
 <!-- SIDE BY SIDE: CALCULATOR + QUESTIONS -->
-<div style="background:#F4F8EE;padding:32px clamp(20px,5vw,72px);border-top:1px solid #DDE8CC">
+<div style="background:#F4F8EE;padding:32px clamp(16px,5vw,72px);border-top:1px solid #DDE8CC">
   <div id="sideBySide" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto">
 
     <!-- LEFT: Market Opportunity Calculator (dropdown style) -->
@@ -1489,7 +1785,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep)}
       <!-- Results -->
       <div id="oppResult2" style="display:none">
         <!-- Benchmarks -->
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+        <div class="bridge-cards" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
           <div style="text-align:center;background:#1A2C00;border-radius:8px;padding:10px 6px;border:1px solid rgba(204,255,0,.15)">
             <div style="font-size:8px;color:#6B7A5A;margin-bottom:4px;text-transform:uppercase;letter-spacing:.08em">Avg earns</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;line-height:1" id="opp2_avg">—</div>
@@ -1643,7 +1939,7 @@ function toggleObjections(){
 <div class="proj-page" id="projPage">
 
 <!-- STICKY BAR -->
-<div style="position:sticky;top:0;z-index:100;background:var(--deep);border-bottom:2px solid var(--lime);padding:9px 24px;display:flex;align-items:center;justify-content:space-between">
+<div style="position:sticky;top:0;z-index:100;background:var(--deep);border-bottom:2px solid var(--lime);padding:9px clamp(14px,4vw,24px);display:flex;align-items:center;justify-content:space-between">
   <div style="display:flex;align-items:flex-end;gap:4px">
     <div style="width:8px;height:22px;background:var(--lime);border-radius:2px;transform:rotate(-8deg);transform-origin:bottom center"></div>
     <div style="width:8px;height:15px;background:var(--lime);border-radius:2px"></div>
@@ -1658,12 +1954,12 @@ function toggleObjections(){
 </div>
 
 <!-- HEADER -->
-<div style="background:var(--deep);padding:22px 24px 20px;border-bottom:3px solid var(--lime)">
+<div style="background:var(--deep);padding:20px clamp(16px,4vw,24px) 18px;border-bottom:3px solid var(--lime)">
   <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);opacity:.7;margin-bottom:5px">Revenue Calculator</div>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--white);line-height:1.05">Your Peak Performance Projection</div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,5vw,30px);color:var(--white);line-height:1.05">Your Peak Performance Projection</div>
 </div>
 
-<div style="background:var(--white);padding:22px 24px 0">
+<div style="background:var(--white);padding:20px clamp(16px,4vw,24px) 0">
 
 <div style="font-size:12px;color:var(--muted);line-height:1.75;margin-bottom:20px">Three quick questions. Drag the sliders and watch the numbers change in real time.</div>
 
@@ -1737,9 +2033,7 @@ function toggleObjections(){
     <div style="font-size:12px;font-weight:700;color:var(--deep)">Where does the extra money come from?</div>
     <div style="font-size:11px;color:var(--muted);margin-top:2px">The same people — just routed to the right offer instead of all going to one place.</div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr">
-    <div style="padding:14px 14px;border-right:1px solid var(--border)">
-      <div style="font-size:18px;margin-bottom:6px">🏆</div>
+  <div class="flow-diagram-3col" style="display:grid;grid-template-columns:1fr 1fr 1fr">
       <div style="font-size:11px;font-weight:700;color:var(--deep);margin-bottom:3px">Your serious clients</div>
       <div style="font-size:10px;color:var(--muted);margin-bottom:8px">Ready to invest. Get your premium offer.</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--deep)" id="a_prem">3</div>
@@ -2407,6 +2701,14 @@ function toggleFeatures(id){
   }
 }
 
+
+function secToggle(id, wrap) {
+  var body = document.getElementById(id);
+  var pill = wrap.querySelector('.sec-toggle-pill') || document.getElementById(id.replace('-body', '-pill'));
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  if (pill) pill.textContent = isOpen ? 'Full detail ▼' : 'Collapse ▲';
+}
 
 function calc(){
   var leads   = parseInt(document.getElementById('leadSlider').value)||50;
