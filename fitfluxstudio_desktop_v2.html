@@ -599,7 +599,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep);ov
     <div class="phase-header"><div class="phase-num" style="background:var(--lime);color:var(--deep)">1</div><div><div class="phase-title">Setup Fee — Months 1 &amp; 2</div><div class="phase-sub">We build and run the system. You validate. No retainer until month 3.</div></div></div>
     <div class="phase-body">
       <div class="phase-row"><div><div class="prl">System build</div><div class="prs">Full CAS build, categorical offer routing layer, all offer pages, sequences, ad creative</div></div><div class="pra">$500–$1,200</div><div class="prw">Once, upfront</div></div>
-      <div class="phase-row ads-row"><div><div class="prl" style="color:var(--dg);display:flex;align-items:center;gap:6px;flex-wrap:wrap"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D6A0F" stroke-width="2" style="flex-shrink:0"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Ad Strategy + Organic Acceleration <span style="font-size:9px;background:var(--lime);color:var(--deep);padding:2px 7px;border-radius:10px;font-weight:700">Months 1–2</span></div><div class="prs" style="color:#2D5A1A">We start with <strong>organic content</strong> to build momentum and attract your first clients. Then we run <strong>targeted ads</strong> (~2 weeks per month) to bring in new clients faster. <strong>Automated opt-in, messaging, conversion &amp; objection handling &amp; follow-up</strong> runs in the background converting leads the whole time. <strong>All ad spend is confirmed with you in writing</strong> before anything goes live.<br><br>This <strong>hybrid approach reduces wasted spend</strong> while <strong>accelerating validation</strong>. Exact amounts confirmed in writing.<br><br><em>From Month 3 onward, ad spend management is the client's responsibility. <strong>Strategy and creative remain handled by the system.</strong></em></div></div><div class="pra" style="color:var(--dg)">Included</div><div class="prw" style="color:var(--dg)">In setup fee</div></div>
+      <!-- Ad Strategy toggle -->
+      <div style="border:1px solid #C8DFAA;border-radius:10px;overflow:hidden;margin:6px 0">
+        <div onclick="var b=this.nextElementSibling,c=this.querySelector('.adschev');b.style.display=b.style.display==='block'?'none':'block';c.style.transform=b.style.display==='block'?'rotate(180deg)':'rotate(0deg)'" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;cursor:pointer;background:#F4F8EE">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D6A0F" stroke-width="2" style="flex-shrink:0"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <span style="font-size:12px;font-weight:700;color:var(--dg)">Ad Strategy + Organic Acceleration</span>
+            <span style="font-size:9px;background:var(--lime);color:var(--deep);padding:2px 8px;border-radius:10px;font-weight:700;letter-spacing:.03em">Months 1–2</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+            <div style="text-align:right">
+              <div style="font-size:14px;font-weight:800;color:var(--dg);letter-spacing:.01em">Included</div>
+              <div style="font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.04em;text-transform:uppercase">In setup fee</div>
+            </div>
+            <svg class="adschev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" style="transition:transform .2s;flex-shrink:0"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div style="display:none;padding:14px 16px;border-top:1px solid #C8DFAA;background:var(--white)">
+          <div style="font-size:11px;color:#2D5A1A;line-height:1.7">We start with <strong>organic content</strong> to build momentum and attract your first clients. Then we run <strong>targeted ads</strong> (~2 weeks per month) to bring in new clients faster. <strong>Automated opt-in, messaging, conversion &amp; objection handling &amp; follow-up</strong> runs in the background converting leads the whole time. <strong>All ad spend is confirmed with you in writing</strong> before anything goes live.<br><br>This <strong>hybrid approach reduces wasted spend</strong> while <strong>accelerating validation</strong>. Exact amounts confirmed in writing.<br><br><em>From Month 3 onward, ad spend management is the client's responsibility. <strong>Strategy and creative remain handled by the system.</strong></em></div>
+        </div>
+      </div>
       <div class="phase-row"><div><div class="prl">Close fee</div><div class="prs">You pay 20% only when a lead becomes a paying client — premium, entry, or community.</div></div><div class="pra">20%</div><div class="prw">Only when closed</div></div>
     </div>
   </div>
@@ -608,13 +627,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--deep);ov
   <div class="price-phase">
     <div class="phase-header"><div class="phase-num" style="background:var(--dg);color:var(--lime)">2</div><div><div class="phase-title">Monthly Retainer + Performance Fee — From Month 3</div><div class="phase-sub">Activates only once the system has proven consistent enrollments in your market.</div></div></div>
     <div class="phase-body">
-      <div class="phase-locked">
-        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L12 8M8 11V9a4 4 0 018 0v2"/><rect x="3" y="11" width="18" height="11" rx="2"/></svg>
-        <div class="plt">Starting in Month 3, you begin paying a monthly fee &amp; sales performance fee.<br><br>
-          The fee is <strong>$497 to $997 per month</strong>, depending on how much you're using the system and your area.<br><br>
-          On top of that, there's a <strong>20% performance fee</strong> on the revenue generated from new enrollments.<br><br>
-          The exact amounts are decided upfront before you start — so there are no surprises later.<br><br>
-          <em style="color:var(--dg)">In short: You only start paying in Month 3, and it's a fixed monthly fee + 20% of what you earn from the system.</em>
+      <!-- Monthly retainer toggle -->
+      <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:4px 0">
+        <div onclick="var b=this.nextElementSibling,c=this.querySelector('.retchev');b.style.display=b.style.display==='block'?'none':'block';c.style.transform=b.style.display==='block'?'rotate(180deg)':'rotate(0deg)';" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;cursor:pointer;background:#F4F8EE">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" style="flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <span style="font-size:12px;font-weight:700;color:var(--deep)">Monthly Retainer + Performance Fee</span>
+            <span style="font-size:9px;background:var(--deep);color:var(--lime);padding:2px 8px;border-radius:10px;font-weight:700;letter-spacing:.03em">From Month 3</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+            <div style="text-align:right">
+              <div style="font-size:14px;font-weight:800;color:var(--deep)">$497–$997</div>
+              <div style="font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.04em;text-transform:uppercase">Per month</div>
+            </div>
+            <svg class="retchev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" style="transition:transform .2s;flex-shrink:0"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div style="display:none;padding:14px 16px;border-top:1px solid var(--border);background:var(--white)">
+          <div style="font-size:11px;color:var(--deep);line-height:1.75">Starting in Month 3, you begin paying a monthly fee &amp; sales performance fee.<br><br>
+            The fee is <strong>$497 to $997 per month</strong>, depending on how much you're using the system and your area.<br><br>
+            On top of that, there's a <strong>20% performance fee</strong> on the revenue generated from new enrollments.<br><br>
+            The exact amounts are decided upfront before you start — so there are no surprises later.<br><br>
+            <em style="color:var(--dg)">In short: You only start paying in Month 3, and it's a fixed monthly fee + 20% of what you earn from the system.</em>
+          </div>
         </div>
       </div>
     </div>
