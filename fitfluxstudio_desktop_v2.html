@@ -2604,11 +2604,7 @@ function closeProjection(){
 
 // ── Tier select page ──
 function showTierSelect(){
-  document.getElementById('projPage').classList.remove('active');
-  document.getElementById('mainDeck').classList.add('hidden');
-  document.getElementById('tierPage').classList.add('active');
-  document.getElementById('invoicePage').classList.remove('active');
-  window.scrollTo(0,0);
+  window.location.href = 'https://canvafitflux.vercel.app/fitflux-territory-form.html?tier=growth';
 }
 function closeTierSelect(){
   document.getElementById('tierPage').classList.remove('active');
@@ -2633,30 +2629,9 @@ function selectTier(tier){
 
 // ── Request invoice — validate, show copy popup, open Instagram DM ──
 function requestInvoice(tierName, tierPrice, tierId){
-  var email    = document.getElementById('email-'+tierId).value.trim();
-  var platform = document.getElementById('platform-'+tierId).value;
-  var handle   = document.getElementById('handle-'+tierId).value.trim().replace(/^@/,'');
-  var errEl    = document.getElementById('form-error-'+tierId);
-
-  if(!email || !handle || !email.includes('@')){
-    errEl.style.display = 'block';
-    return;
-  }
-  errEl.style.display = 'none';
-
-  // Update confirmation screen
-  document.getElementById('invoiceConfirmTier').textContent = tierName + ' — ' + tierPrice;
-  document.getElementById('invoiceConfirmHandle').textContent = '@' + handle + ' (' + platform + ')';
-  document.getElementById('invoiceConfirmEmail').textContent  = email;
-
-  // Build message
-  var msg = 'Hi FitfluxStudio! I want to request an invoice.\n\nTier: ' + tierName + ' (' + tierPrice + ')\nEmail: ' + email + '\n' + platform + ': @' + handle + '\n\nPlease confirm my territory is available and send me the invoice.';
-
-  // Show popup
-  document.getElementById('dmPopupMsg').textContent = msg;
-  var popup = document.getElementById('dmPopup');
-  popup.style.display = 'flex';
-  popup.style.pointerEvents = 'all';
+  var tierMap = { 'launchpad':'launchpad', 'growth':'growth', 'pro':'pro' };
+  var tierKey = tierMap[tierId] || tierId;
+  window.location.href = 'https://canvafitflux.vercel.app/fitflux-territory-form.html?tier=' + tierKey;
 }
 
 // ── LEADERBOARD ──
