@@ -3580,12 +3580,13 @@
         _claimPrice = "";
 
       function claimTerritory(tier, price) {
-        _claimTier = tier;
-        _claimPrice = price;
-        document.getElementById("claimTierName").textContent = tier;
-        document.getElementById("claimTierPrice").textContent = price;
-        var overlay = document.getElementById("claimOverlay");
-        overlay.style.display = "flex";
+        var tierMap = {
+          'Presence': 'presence',
+          'Authority': 'authority',
+          'Category King/Queen': 'categoryking'
+        };
+        var tierKey = tierMap[tier] || 'presence';
+        window.location.href = 'https://canvafitflux.vercel.app/fitflux-territory-form.html?tier=' + tierKey;
       }
       function closeClaimOverlay() {
         document.getElementById("claimOverlay").style.display = "none";
