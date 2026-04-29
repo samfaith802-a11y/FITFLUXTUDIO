@@ -64,11 +64,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--deep);color:#fff;overflow
 .ff-modal-bg.open{display:flex}
 .ff-modal{background:#0b1c03;border:1px solid var(--border);border-radius:20px;padding:clamp(24px,4vw,38px);max-width:540px;width:100%;position:relative;max-height:92vh;overflow-y:auto;animation:modalIn .4s cubic-bezier(.22,1,.36,1) both}
 @keyframes modalIn{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}
-.ff-modal-close{position:absolute;top:16px;right:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);font-size:15px;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.ff-modal-close{position:absolute;top:16px;right:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);font-size:15px;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;z-index:10}
 .ff-modal-close:hover{background:rgba(255,255,255,.1);color:#fff}
 .ff-mey{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .ff-mt{font-family:'DM Sans',sans-serif;font-size:clamp(22px,4vw,30px);font-weight:800;color:#fff;margin-bottom:8px;line-height:1.05}
 .ff-md{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;color:var(--muted);margin-bottom:26px;line-height:1.7}
+
+/* === NICHE SELECTOR SCREEN === */
+.ff-niche-screen{display:block}
+.ff-offers-screen{display:none}
+.ff-niche-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+@property --na{syntax:'<angle>';initial-value:0deg;inherits:false}
+.ff-niche-card{position:relative;border-radius:16px;padding:28px 20px 24px;cursor:pointer;text-align:center;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);width:100%;overflow:hidden;transition:background .3s,transform .3s,border-color .3s;display:flex;flex-direction:column;align-items:center;gap:10px}
+.ff-niche-card::before{content:'';position:absolute;inset:-1.5px;border-radius:16px;padding:1.5px;background:conic-gradient(from var(--na),rgba(204,255,0,0) 0deg,rgba(204,255,0,.6) 60deg,rgba(204,255,0,1) 90deg,rgba(204,255,0,.6) 120deg,rgba(204,255,0,0) 180deg,rgba(204,255,0,0) 360deg);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s}
+.ff-niche-card:hover::before{opacity:1;animation:spinNA 1.8s linear infinite}
+@keyframes spinNA{from{--na:0deg}to{--na:360deg}}
+.ff-niche-card:hover{border-color:transparent;background:rgba(204,255,0,.04);transform:translateY(-4px)}
+.ff-niche-icon{font-size:36px;line-height:1;margin-bottom:4px}
+.ff-niche-label{font-family:'Barlow Condensed',sans-serif;font-size:clamp(15px,2.2vw,18px);font-weight:700;color:#fff;letter-spacing:.02em;line-height:1.1}
+.ff-niche-sub{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:300;color:var(--muted);line-height:1.5;margin-top:2px}
+.ff-niche-arrow{width:28px;height:28px;border:1px solid rgba(204,255,0,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:8px;transition:background .3s,border-color .3s}
+.ff-niche-card:hover .ff-niche-arrow{background:var(--lime);border-color:var(--lime)}
+.ff-niche-card:hover .ff-niche-arrow svg{stroke:var(--deep)}
+.ff-niche-arrow svg{width:10px;height:10px;stroke:rgba(204,255,0,.5);stroke-width:2.5;fill:none;transition:stroke .3s}
+
+/* === BACK BUTTON === */
+.ff-back{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-bottom:18px;padding:0;transition:color .2s}
+.ff-back:hover{color:#fff}
+.ff-back svg{width:12px;height:12px;stroke:currentColor;stroke-width:2.5;fill:none;transform:rotate(180deg)}
+
+/* === OFFERS === */
 .ff-offers{display:flex;flex-direction:column;gap:14px}
 @property --oa{syntax:'<angle>';initial-value:0deg;inherits:false}
 .ff-offer{position:relative;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:22px 66px 22px 22px;cursor:pointer;text-align:left;background:rgba(255,255,255,.02);width:100%;overflow:hidden;transition:background .3s,transform .3s,border-color .3s}
@@ -85,7 +110,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--deep);color:#fff;overflow
 .ff-oarr svg{width:12px;height:12px;stroke:rgba(204,255,0,.6);stroke-width:2.5;fill:none;transition:stroke .3s}
 .ff-offer:hover .ff-oarr svg{stroke:var(--deep)}
 .ff-offer.featured{border-color:rgba(204,255,0,.14);background:rgba(204,255,0,.025)}
-@media(max-width:600px){.ff-h1{font-size:clamp(44px,14vw,72px)}.ff-sub-item{font-size:11px}.ff-modal{border-radius:16px}.ff-pitch-content{text-align:left}}
+
+/* === SPA NICHE BADGE === */
+.ff-spa-badge{display:inline-block;background:rgba(204,255,0,.06);color:rgba(204,255,0,.7);font-family:'DM Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 11px;border-radius:20px;margin-bottom:8px;border:1px solid rgba(204,255,0,.12)}
+
+/* Slide transition */
+.ff-modal-inner{position:relative;overflow:hidden}
+.ff-screen{transition:opacity .3s ease,transform .3s ease}
+.ff-screen.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;width:100%;transform:translateX(24px)}
+.ff-screen.visible{opacity:1;pointer-events:auto;position:relative;transform:translateX(0)}
+
+@media(max-width:600px){.ff-h1{font-size:clamp(44px,14vw,72px)}.ff-sub-item{font-size:11px}.ff-modal{border-radius:16px}.ff-pitch-content{text-align:left}.ff-niche-grid{grid-template-columns:1fr 1fr;gap:10px}.ff-niche-card{padding:20px 14px 18px}}
 </style>
 </head>
 <body>
@@ -184,24 +219,82 @@ body{font-family:'DM Sans',sans-serif;background:var(--deep);color:#fff;overflow
 
 <div class="ff-modal-bg" id="ffModal">
   <div class="ff-modal">
-    <button class="ff-modal-close" onclick="document.getElementById('ffModal').classList.remove('open')">✕</button>
-    <div class="ff-mey">Choose your path</div>
-    <div class="ff-mt">Where are you right now?</div>
-    <div class="ff-md">Pick the offer that fits where your brand is today, and we will take it from there.</div>
-    <div class="ff-offers">
-      <button class="ff-offer" onclick="window.location.href='fitfluxstudio_socialmedia_v6.html'">
-        <div class="ff-oarr"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></div>
-        <div class="ff-otag">Offer 01</div>
-        <div class="ff-on">Social Media Management</div>
-        <div class="ff-od">Done-for-you content, posting, and community management. Perfect for coaches who want to show up consistently online without spending hours doing it themselves.</div>
-      </button>
-      <button class="ff-offer featured" onclick="window.location.href='fitfluxstudio_desktop_v2.html'">
-        <div class="ff-oarr"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></div>
-        <div class="ff-obadge">Most Popular</div>
-        <div class="ff-otag">Offer 02</div>
-        <div class="ff-on">Management and Marketing</div>
-        <div class="ff-od">Everything in management, plus paid ads, funnel strategy, and lead generation. For fitness professionals ready to scale and turn their audience into a steady stream of paying clients.</div>
-      </button>
+    <button class="ff-modal-close" onclick="ffCloseModal()">✕</button>
+    <div class="ff-modal-inner">
+
+      <!-- SCREEN 1: NICHE SELECTOR -->
+      <div class="ff-screen visible" id="ffScreenNiche">
+        <div class="ff-mey">Choose your path</div>
+        <div class="ff-mt">Who are you?</div>
+        <div class="ff-md">Select your world and we'll show you exactly what we offer for you.</div>
+        <div class="ff-niche-grid">
+          <button class="ff-niche-card" onclick="ffShowOffers('coach')">
+            <div class="ff-niche-icon">🏋️</div>
+            <div class="ff-niche-label">Fitness Coach</div>
+            <div class="ff-niche-sub">Personal brand &amp; audience growth</div>
+            <div class="ff-niche-arrow"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></div>
+          </button>
+          <button class="ff-niche-card" onclick="ffShowOffers('spa')">
+            <div class="ff-niche-icon">🧖</div>
+            <div class="ff-niche-label">Luxury Spa / Wellness Business</div>
+            <div class="ff-niche-sub">Premium &amp; experience-based</div>
+            <div class="ff-niche-arrow"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 2A: FITNESS COACH OFFERS -->
+      <div class="ff-screen hidden" id="ffScreenCoach">
+        <button class="ff-back" onclick="ffShowNiche()">
+          <svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+          Back
+        </button>
+        <div class="ff-mey">🏋️ Fitness Coach</div>
+        <div class="ff-mt">Where are you right now?</div>
+        <div class="ff-md">Pick the offer that fits where your brand is today, and we will take it from there.</div>
+        <div class="ff-offers">
+          <button class="ff-offer" onclick="window.location.href='fitfluxstudio_socialmedia_v6.html'">
+            <div class="ff-oarr"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></div>
+            <div class="ff-otag">Offer 01</div>
+            <div class="ff-on">Social Media Management</div>
+            <div class="ff-od">Done-for-you content, posting, and community management. Perfect for coaches who want to show up consistently online without spending hours doing it themselves.</div>
+          </button>
+          <button class="ff-offer featured" onclick="window.location.href='fitfluxstudio_desktop_v2.html'">
+            <div class="ff-oarr"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></div>
+            <div class="ff-obadge">Most Popular</div>
+            <div class="ff-otag">Offer 02</div>
+            <div class="ff-on">Management and Marketing</div>
+            <div class="ff-od">Everything in management, plus paid ads, funnel strategy, and lead generation. For fitness professionals ready to scale and turn their audience into a steady stream of paying clients.</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 2B: LUXURY SPA OFFERS -->
+      <div class="ff-screen hidden" id="ffScreenSpa">
+        <button class="ff-back" onclick="ffShowNiche()">
+          <svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+          Back
+        </button>
+        <div class="ff-mey">🧖 Luxury Spa / Wellness Business</div>
+        <div class="ff-mt">Where are you right now?</div>
+        <div class="ff-md">Pick the offer that fits where your business is today, and we will elevate it from there.</div>
+        <div class="ff-offers">
+          <button class="ff-offer" onclick="window.location.href='fitfluxstudio_spa_socialmedia.html'">
+            <div class="ff-oarr"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></div>
+            <div class="ff-otag">Offer 01</div>
+            <div class="ff-on">Luxury Content &amp; Brand Presence</div>
+            <div class="ff-od">Done-for-you content that positions your spa as the premium choice — so your feed looks as good as your facility feels.</div>
+          </button>
+          <button class="ff-offer featured" onclick="window.location.href='fitfluxstudio_spa_marketing.html'">
+            <div class="ff-oarr"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></div>
+            <div class="ff-obadge">Most Popular</div>
+            <div class="ff-otag">Offer 02</div>
+            <div class="ff-on">Full Presence &amp; Client Acquisition</div>
+            <div class="ff-od">Everything in Offer 01, plus paid ads, funnel strategy &amp; inbound lead generation, website traffic — built to fill your booking calendar with high-value clients.</div>
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -219,37 +312,53 @@ setTimeout(function(){document.getElementById('ffHC').classList.add('vis');},500
 })();
 var ob=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.15});
 ob.observe(document.getElementById('ffPC'));
-document.getElementById('ffModal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
 
-// Pill word highlight logic — light up each word as the border passes over it
+// Modal close on bg click
+document.getElementById('ffModal').addEventListener('click',function(e){if(e.target===this)ffCloseModal();});
+
+function ffCloseModal(){
+  document.getElementById('ffModal').classList.remove('open');
+  // Reset back to niche screen after close
+  setTimeout(ffShowNiche, 400);
+}
+
+function ffShowOffers(niche){
+  var nScreen = document.getElementById('ffScreenNiche');
+  var cScreen = document.getElementById('ffScreenCoach');
+  var sScreen = document.getElementById('ffScreenSpa');
+  nScreen.classList.remove('visible'); nScreen.classList.add('hidden');
+  if(niche === 'coach'){
+    cScreen.classList.remove('hidden'); cScreen.classList.add('visible');
+    sScreen.classList.remove('visible'); sScreen.classList.add('hidden');
+  } else {
+    sScreen.classList.remove('hidden'); sScreen.classList.add('visible');
+    cScreen.classList.remove('visible'); cScreen.classList.add('hidden');
+  }
+}
+
+function ffShowNiche(){
+  var nScreen = document.getElementById('ffScreenNiche');
+  var cScreen = document.getElementById('ffScreenCoach');
+  var sScreen = document.getElementById('ffScreenSpa');
+  nScreen.classList.remove('hidden'); nScreen.classList.add('visible');
+  cScreen.classList.remove('visible'); cScreen.classList.add('hidden');
+  sScreen.classList.remove('visible'); sScreen.classList.add('hidden');
+}
+
+// Pill word highlight logic
 (function(){
   var items = document.querySelectorAll('.ff-sub-item');
-  var spinDuration = 2800; // ms — matches CSS 2.8s
-  // Approximate angle positions of each word along the pill border
-  // Pill is roughly horizontal, so words sit at ~270deg (top-left), ~0deg (right), ~90deg (bottom-right)
-  // We light up each word when the bright spot (85deg in conic) is near it
-  // Words are at roughly these fractions around the pill: 0.18, 0.5, 0.82
-  var wordAngles = [65, 180, 295]; // degrees where each word lives on the border
-  var highlightWidth = 60; // degrees of highlight spread
-
-  function angleDiff(a, b){
-    var d = Math.abs(a - b) % 360;
-    return d > 180 ? 360 - d : d;
-  }
-
+  var spinDuration = 2800;
+  var wordAngles = [65, 180, 295];
+  var highlightWidth = 60;
+  function angleDiff(a, b){var d = Math.abs(a - b) % 360;return d > 180 ? 360 - d : d;}
   function tick(){
     var now = performance.now();
     var angle = (now % spinDuration) / spinDuration * 360;
-    // The bright peak in conic-gradient is at 85deg relative to --sa
     var brightAngle = (angle + 85) % 360;
-
     items.forEach(function(item, i){
       var diff = angleDiff(brightAngle, wordAngles[i]);
-      if(diff < highlightWidth){
-        item.classList.add('lit');
-      } else {
-        item.classList.remove('lit');
-      }
+      if(diff < highlightWidth){item.classList.add('lit');}else{item.classList.remove('lit');}
     });
     requestAnimationFrame(tick);
   }
