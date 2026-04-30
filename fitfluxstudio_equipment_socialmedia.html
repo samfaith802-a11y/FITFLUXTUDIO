@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Media & Brand Visibility — FitFlux Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=DM+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lime:#CCFF00;
+  --lime-soft:#B8E600;
+  --deep:#0D1F00;
+  --pitch:#071400;
+  --muted:#7A9468;
+  --border:rgba(204,255,0,0.13);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--pitch);color:#fff;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:1000}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,72px);background:linear-gradient(180deg,rgba(7,20,0,.96) 0%,transparent 100%)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.ff-bars{display:flex;gap:5px;align-items:flex-end}
+.ff-b{background:var(--lime);border-radius:2px}
+.ff-b1{width:6px;height:18px;transform:rotate(-8deg);transform-origin:bottom center}
+.ff-b2{width:6px;height:11px}
+.ff-b3{width:6px;height:18px;transform:rotate(8deg);transform-origin:bottom center}
+.nav-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:.18em;color:var(--lime);font-weight:600}
+.nav-back{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid rgba(204,255,0,.15);padding:8px 18px;border-radius:50px;cursor:pointer;text-decoration:none;transition:color .2s,border-color .2s}
+.nav-back:hover{color:#fff;border-color:rgba(204,255,0,.4)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(20px,7vw,96px) clamp(48px,8vh,80px);position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;pointer-events:none}
+.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(204,255,0,.045) 0%,transparent 70%);top:-120px;right:-120px;animation:orbFloat 9s ease-in-out infinite}
+.orb-2{width:380px;height:380px;background:radial-gradient(circle,rgba(204,255,0,.03) 0%,transparent 70%);bottom:80px;left:-80px;animation:orbFloat 12s ease-in-out infinite reverse}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(16px,-16px)}}
+
+.hero-eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;opacity:0;transform:translateY(16px);transition:opacity .9s,transform .9s}
+.hero-eyebrow span{color:var(--lime);margin-right:8px}
+.hero-h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(52px,11vw,124px);line-height:.86;letter-spacing:.01em;margin-bottom:24px;opacity:0;transform:translateY(20px);transition:opacity .9s .1s,transform .9s .1s}
+.hero-h1 .thin{font-weight:300;color:rgba(255,255,255,.75)}
+.hero-h1 .bold{font-weight:800;color:#fff}
+.hero-h1 .lime{font-weight:800;color:var(--lime)}
+.hero-desc{font-size:clamp(13px,1.6vw,16px);font-weight:300;color:rgba(255,255,255,.5);line-height:1.8;max-width:540px;margin-bottom:36px;opacity:0;transform:translateY(16px);transition:opacity .9s .2s,transform .9s .2s}
+.hero-cta-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;opacity:0;transform:translateY(14px);transition:opacity .9s .3s,transform .9s .3s}
+.hero.vis .hero-eyebrow,.hero.vis .hero-h1,.hero.vis .hero-desc,.hero.vis .hero-cta-row,.hero.vis .stat-strip{opacity:1;transform:none}
+
+.stat-strip{position:absolute;right:clamp(20px,5vw,72px);bottom:clamp(48px,8vh,80px);display:flex;flex-direction:column;gap:24px;opacity:0;transform:translateX(20px);transition:opacity 1s .4s,transform 1s .4s}
+.stat-item{text-align:right}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;color:var(--lime);line-height:1}
+.stat-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+
+.btn-primary{background:var(--lime);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;padding:14px 28px;border:none;border-radius:50px;cursor:pointer;letter-spacing:.06em;display:inline-flex;align-items:center;gap:10px;transition:transform .25s,background .25s;text-decoration:none}
+.btn-primary:hover{transform:scale(1.04);background:var(--lime-soft)}
+.btn-arrow{width:26px;height:26px;background:rgba(13,31,0,.15);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.btn-arrow svg{width:11px;height:11px;stroke:var(--deep);stroke-width:2.5;fill:none;transition:transform .3s}
+.btn-primary:hover .btn-arrow svg{transform:translateX(3px)}
+
+/* PAIN */
+.section{padding:clamp(60px,10vh,120px) clamp(20px,7vw,96px)}
+.section-label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:40px;display:flex;align-items:center;gap:14px}
+.section-label::before{content:'';width:32px;height:1px;background:var(--border)}
+
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.pain-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);padding:30px 26px;transition:background .3s,border-color .3s}
+.pain-card:hover{background:rgba(204,255,0,.02);border-color:rgba(204,255,0,.1)}
+.pain-num{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.2em;color:rgba(204,255,0,.3);font-weight:600;margin-bottom:14px}
+.pain-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(18px,2.4vw,24px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:10px}
+.pain-body{font-size:13px;font-weight:300;color:var(--muted);line-height:1.8}
+.pain-body strong{color:rgba(255,255,255,.65);font-weight:400}
+
+/* OFFER */
+.offer-section{padding:clamp(60px,10vh,120px) clamp(20px,7vw,96px);background:rgba(204,255,0,.012);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.offer-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,80px);align-items:start}
+.offer-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(204,255,0,.08);border:1px solid rgba(204,255,0,.2);border-radius:50px;padding:6px 14px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-bottom:20px}
+.offer-h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(34px,5.5vw,62px);font-weight:800;line-height:.9;color:#fff;margin-bottom:14px}
+.offer-sub{font-size:clamp(13px,1.5vw,15px);font-weight:300;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:32px}
+.offer-promise{background:rgba(204,255,0,.05);border-left:2px solid var(--lime);padding:18px 22px;margin-bottom:32px;border-radius:0 8px 8px 0}
+.offer-promise p{font-size:13px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.8}
+.offer-promise strong{color:var(--lime);font-weight:700}
+
+.deliverables{display:flex;flex-direction:column;gap:0}
+.del-item{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.del-item:last-child{border-bottom:none}
+.del-check{width:20px;height:20px;border:1px solid rgba(204,255,0,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.del-check svg{width:9px;height:9px;stroke:var(--lime);stroke-width:2.5;fill:none}
+.del-text{font-size:13px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.6}
+.del-text strong{color:#fff;font-weight:700;display:block;margin-bottom:2px;font-size:14px}
+
+/* Visual card */
+.offer-visual{position:relative}
+.vis-card{background:rgba(13,31,0,.7);border:1px solid rgba(204,255,0,.1);border-radius:16px;padding:26px;margin-bottom:12px}
+.vis-card-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.vis-card-val{font-family:'Barlow Condensed',sans-serif;font-size:clamp(30px,4vw,44px);font-weight:800;color:var(--lime);line-height:1}
+.vis-card-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:4px}
+.vis-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.vis-m-val{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff}
+.vis-m-key{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* PROCESS */
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px}
+.process-step{padding:32px 24px;border:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.01);position:relative;transition:background .3s}
+.process-step:hover{background:rgba(204,255,0,.015)}
+.step-num{font-family:'Barlow Condensed',sans-serif;font-size:60px;font-weight:900;color:rgba(204,255,0,.05);position:absolute;top:14px;right:18px;line-height:1;pointer-events:none}
+.step-icon{width:34px;height:34px;border:1px solid rgba(204,255,0,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.step-icon svg{width:15px;height:15px;stroke:var(--lime);stroke-width:1.5;fill:none}
+.step-title{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:9px}
+.step-body{font-size:12px;font-weight:300;color:var(--muted);line-height:1.8}
+
+/* RESULTS */
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.result-box{background:var(--pitch);padding:34px 26px}
+.result-num{font-family:'Barlow Condensed',sans-serif;font-size:clamp(38px,5vw,56px);font-weight:900;color:var(--lime);line-height:1;margin-bottom:8px}
+.result-label{font-size:12px;font-weight:300;color:var(--muted);line-height:1.7}
+.result-label strong{color:rgba(255,255,255,.6);font-weight:700;display:block;font-size:13px;margin-bottom:2px}
+
+/* PRICING */
+.pricing-section{padding:clamp(60px,10vh,120px) clamp(20px,6vw,96px)}
+.pricing-wrap{max-width:1100px;margin:0 auto}
+.pricing-eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.pricing-eyebrow::before{content:'';width:32px;height:1px;background:var(--border)}
+.pricing-h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,6vw,68px);font-weight:800;line-height:.88;color:#fff;margin-bottom:14px}
+.pricing-h2 .lime{color:var(--lime)}
+.pricing-sub{font-size:clamp(13px,1.5vw,16px);font-weight:300;color:rgba(255,255,255,.38);margin-bottom:48px;max-width:520px;line-height:1.7}
+.tier-grid{display:grid;grid-template-columns:1fr;gap:2px;margin-bottom:24px}
+@media(min-width:700px){.tier-grid{grid-template-columns:repeat(3,1fr)}}
+.tier-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);padding:32px 24px;position:relative;display:flex;flex-direction:column;transition:border-color .3s,background .3s}
+.tier-card:hover{background:rgba(204,255,0,.02);border-color:rgba(204,255,0,.12)}
+.tier-card--featured{background:rgba(204,255,0,.03);border-color:rgba(204,255,0,.18)}
+.tier-popular{display:inline-block;background:var(--lime);color:var(--deep);font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.tier-tag{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.tier-name{font-family:'Barlow Condensed',sans-serif;font-size:clamp(20px,2.8vw,26px);font-weight:800;color:#fff;line-height:1.05;margin-bottom:12px}
+.tier-price{font-family:'Barlow Condensed',sans-serif;font-size:clamp(30px,4.5vw,46px);font-weight:900;color:var(--lime);line-height:1;margin-bottom:4px}
+.tier-cycle{font-size:13px;font-weight:300;color:var(--muted)}
+.tier-desc{font-size:12px;font-weight:300;color:var(--muted);line-height:1.7;margin:12px 0 16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.05)}
+.tier-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;flex:1}
+.tier-features li{font-size:12px;font-weight:300;color:rgba(255,255,255,.6);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.chk{color:var(--lime);font-size:11px;flex-shrink:0;margin-top:1px}
+.tier-btn{background:rgba(255,255,255,.05);color:#fff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;padding:13px 20px;border:1px solid rgba(255,255,255,.1);border-radius:50px;cursor:pointer;letter-spacing:.06em;display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;width:100%;margin-top:auto}
+.tier-btn:hover{background:rgba(204,255,0,.08);border-color:rgba(204,255,0,.3);color:var(--lime)}
+.tier-btn--featured{background:var(--lime);color:var(--deep);border-color:var(--lime)}
+.tier-btn--featured:hover{background:#b8e600;border-color:#b8e600;color:var(--deep)}
+.tier-btn-arrow{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tier-btn--featured .tier-btn-arrow{background:rgba(13,31,0,.15)}
+.tier-btn-arrow svg{width:10px;height:10px;stroke:currentColor;stroke-width:2.5;fill:none}
+.pricing-note{font-size:11px;color:rgba(255,255,255,.22);text-align:center;letter-spacing:.06em}
+
+footer{padding:26px clamp(20px,7vw,96px);border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.18em;color:rgba(204,255,0,.4);font-weight:600}
+.footer-copy{font-size:10px;color:rgba(255,255,255,.18);letter-spacing:.08em}
+
+@media(max-width:600px){
+  .hero{min-height:auto;padding:100px 20px 60px}
+  .stat-strip{display:none}
+  .pain-grid{grid-template-columns:1fr}
+  .offer-layout{grid-template-columns:1fr}
+  .offer-visual{display:none}
+  .process-grid{grid-template-columns:1fr}
+  .results-grid{grid-template-columns:1fr 1fr}
+  .hero-cta-row{flex-direction:column;align-items:flex-start}
+  .tier-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="ff-bars"><div class="ff-b ff-b1"></div><div class="ff-b ff-b2"></div><div class="ff-b ff-b3"></div></div>
+    <span class="nav-name">FITFLUXSTUDIO</span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Offers</a>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="hero-eyebrow"><span>Offer 01</span> Fitness Equipment & Retail</div>
+  <h1 class="hero-h1">
+    <span class="thin">YOUR PRODUCT</span><br>
+    <span class="bold">IS BUILT</span><br>
+    <span class="lime">TO PERFORM.</span><br>
+    <span class="thin">your brand should too.</span>
+  </h1>
+  <p class="hero-desc">Most fitness equipment brands have great products — but invisible brands. Serious buyers scroll past you to competitors they recognise. We fix that. Done-for-you content that builds the brand trust that turns followers into buyers.</p>
+  <div class="hero-cta-row">
+    <a href="#offer" class="btn-primary">
+      See What's Included
+      <span class="btn-arrow"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
+    </a>
+  </div>
+  <div class="stat-strip">
+    <div class="stat-item"><div class="stat-num">4×</div><div class="stat-label">More Product Discovery</div></div>
+    <div class="stat-item"><div class="stat-num">$0</div><div class="stat-label">Your Time Spent</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Brand Consistent</div></div>
+  </div>
+</section>
+
+<!-- PAIN SECTION -->
+<section class="section">
+  <div class="section-label">The Real Problem</div>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-num">01</div>
+      <div class="pain-title">Serious Buyers Don't Know You Exist</div>
+      <div class="pain-body">High-intent gym owners, PT studios, and home gym builders check Instagram and Google before they buy. <strong>If your brand is invisible or inconsistent, they buy from whoever shows up first — and it's rarely you.</strong></div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">02</div>
+      <div class="pain-title">Your Product Is Great. Your Content Doesn't Show It.</div>
+      <div class="pain-body">Blurry product photos, generic captions, no brand story. <strong>When your content looks like every other equipment page, buyers have no reason to trust you over the competition — even if your product is superior.</strong></div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">03</div>
+      <div class="pain-title">You're Posting — But It's Not Moving Stock</div>
+      <div class="pain-body">Random posts don't build buyer confidence. <strong>Fitness buyers need to see your product in context — in real gyms, in real hands, solving real problems. Without that narrative, engagement stays low and sales stay flat.</strong></div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">04</div>
+      <div class="pain-title">You're Running a Brand, Not a Content Studio</div>
+      <div class="pain-body">Every hour you spend planning posts, editing Reels, and writing captions is an hour not spent sourcing, selling, or scaling. <strong>Content should work for you — not consume you.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer-section" id="offer">
+  <div class="offer-layout">
+    <div>
+      <div class="offer-tag">Offer 01 — Social Media Management</div>
+      <h2 class="offer-h2">SOCIAL MEDIA<br>& BRAND<br>VISIBILITY</h2>
+      <p class="offer-sub">Done-for-you content that puts your products in front of serious fitness buyers — so your brand becomes the one they recognise, trust, and buy from.</p>
+      <div class="offer-promise">
+        <p>We don't just post product photos. We <strong>build buyer confidence</strong> — the kind that makes a gym owner or fitness enthusiast think: <strong>"This is the brand I've been looking for."</strong></p>
+      </div>
+      <div class="deliverables">
+        <div class="del-item">
+          <div class="del-check"><svg viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3"/></svg></div>
+          <div class="del-text"><strong>Product Content Strategy</strong>Monthly content plan built around your product range, launch calendar, and target buyer — planned weeks in advance.</div>
+        </div>
+        <div class="del-item">
+          <div class="del-check"><svg viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3"/></svg></div>
+          <div class="del-text"><strong>Brand-Voice Copywriting</strong>Every caption written to build trust, highlight benefits, and drive action — no generic product descriptions.</div>
+        </div>
+        <div class="del-item">
+          <div class="del-check"><svg viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3"/></svg></div>
+          <div class="del-text"><strong>Content Production & Scheduling</strong>8 posts/week + 7 stories — published at peak times for your fitness buyer audience.</div>
+        </div>
+        <div class="del-item">
+          <div class="del-check"><svg viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3"/></svg></div>
+          <div class="del-text"><strong>Community & Enquiry Management</strong>Comments, DMs, and product enquiries handled — no potential sale lost while you're busy running the business.</div>
+        </div>
+        <div class="del-item">
+          <div class="del-check"><svg viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3"/></svg></div>
+          <div class="del-text"><strong>Monthly Performance Report</strong>Clear breakdown of reach, engagement, profile visits, and link clicks — with real sales attribution where possible.</div>
+        </div>
+      </div>
+    </div>
+    <div class="offer-visual">
+      <div class="vis-card">
+        <div class="vis-card-label">Brand Authority Score</div>
+        <div class="vis-card-val">↑ 87%</div>
+        <div class="vis-card-sub">Buyer trust perception</div>
+        <div class="vis-metrics">
+          <div><div class="vis-m-val">+280%</div><div class="vis-m-key">Profile visits</div></div>
+          <div><div class="vis-m-val">22×</div><div class="vis-m-key">Product saves</div></div>
+          <div><div class="vis-m-val">3.6×</div><div class="vis-m-key">DMs per post</div></div>
+        </div>
+      </div>
+      <div class="vis-card">
+        <div class="vis-card-label">Product Enquiries This Month</div>
+        <div class="vis-card-val">+63</div>
+        <div class="vis-card-sub">From organic content alone</div>
+      </div>
+      <div class="vis-card">
+        <div class="vis-card-label">Content Pieces Delivered</div>
+        <div class="vis-card-val">32</div>
+        <div class="vis-card-sub">This month · 0 hrs from you</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section">
+  <div class="section-label">How It Works</div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-icon"><svg viewBox="0 0 20 20"><path d="M4 6h12M4 10h12M4 14h8"/></svg></div>
+      <div class="step-title">Brand & Product Discovery</div>
+      <div class="step-body">We learn your products, target buyers, tone, and competitive positioning. We understand what makes your equipment stand out — then build content that proves it.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-icon"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 11h4"/></svg></div>
+      <div class="step-title">Content Build & Approval</div>
+      <div class="step-body">We produce a full month of content for your review. You approve or refine — nothing posts without your sign-off. Most clients approve on the first pass.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-icon"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></div>
+      <div class="step-title">Publish, Manage & Grow</div>
+      <div class="step-body">We handle all posting, scheduling, and community responses. You focus on fulfilling orders and growing the business. We handle growing the audience.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section" style="border-top:1px solid var(--border)">
+  <div class="section-label">What Changes</div>
+  <div class="results-grid">
+    <div class="result-box">
+      <div class="result-num">4×</div>
+      <div class="result-label"><strong>More Product Discovery</strong>Serious buyers find your brand through content — not just paid ads.</div>
+    </div>
+    <div class="result-box">
+      <div class="result-num">↑72%</div>
+      <div class="result-label"><strong>Enquiry Rate</strong>When your brand looks credible, buyers reach out faster and convert sooner.</div>
+    </div>
+    <div class="result-box">
+      <div class="result-num">100%</div>
+      <div class="result-label"><strong>Time Reclaimed</strong>Zero hours on content creation, captions, or scheduling. All done for you.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-wrap">
+    <div class="pricing-eyebrow">Choose Your Plan</div>
+    <h2 class="pricing-h2">THREE TIERS.<br><span class="lime">ONE MISSION.</span><br>Build buyer trust.</h2>
+    <p class="pricing-sub">Every tier delivers done-for-you content that builds your brand in front of the right buyers. Choose your level of depth and support.</p>
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-tag">Tier 01</div>
+        <div class="tier-name">Brand Visibility<br>Starter</div>
+        <div class="tier-price">$1,500<span class="tier-cycle">/month</span></div>
+        <div class="tier-desc">Full content strategy and production — your brand showing up consistently in front of serious fitness buyers every single week.</div>
+        <ul class="tier-features">
+          <li><span class="chk">✓</span>Full product content calendar</li>
+          <li><span class="chk">✓</span>8 posts/week + 7 stories</li>
+          <li><span class="chk">✓</span>Brand-voice copywriting</li>
+          <li><span class="chk">✓</span>Profile & grid optimisation</li>
+          <li><span class="chk">✓</span>Monthly performance report</li>
+        </ul>
+        <button class="tier-btn" onclick="selectTier('brandvisibility','Brand Visibility Starter','1,500')">
+          Claim This Tier
+          <span class="tier-btn-arrow"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
+        </button>
+      </div>
+      <div class="tier-card tier-card--featured">
+        <div class="tier-popular">Most Popular</div>
+        <div class="tier-tag">Tier 02</div>
+        <div class="tier-name">Social Authority<br>& Engagement</div>
+        <div class="tier-price">$2,500<span class="tier-cycle">/month</span></div>
+        <div class="tier-desc">Everything in Tier 01 plus full DM & enquiry management, monthly strategy call, and competitor brand tracking.</div>
+        <ul class="tier-features">
+          <li><span class="chk">✓</span>Everything in Tier 01</li>
+          <li><span class="chk">✓</span>DM & enquiry management</li>
+          <li><span class="chk">✓</span>Monthly strategy call + report</li>
+          <li><span class="chk">✓</span>Buyer journey tracking</li>
+          <li><span class="chk">✓</span>Competitor brand intelligence</li>
+        </ul>
+        <button class="tier-btn tier-btn--featured" onclick="selectTier('socialauthority','Social Authority & Engagement','2,500')">
+          Claim This Tier
+          <span class="tier-btn-arrow"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
+        </button>
+      </div>
+      <div class="tier-card">
+        <div class="tier-tag">Tier 03</div>
+        <div class="tier-name">Elite Brand<br>Domination</div>
+        <div class="tier-price">$4,000<span class="tier-cycle">/month</span></div>
+        <div class="tier-desc">White-glove content management with 24/7 DM handling, bi-weekly calls, ad-ready creatives, and a dedicated brand manager.</div>
+        <ul class="tier-features">
+          <li><span class="chk">✓</span>Everything in Tier 02</li>
+          <li><span class="chk">✓</span>24/7 DM & enquiry handling</li>
+          <li><span class="chk">✓</span>Bi-weekly strategy calls</li>
+          <li><span class="chk">✓</span>Ad-ready creative suite</li>
+          <li><span class="chk">✓</span>Dedicated brand manager</li>
+        </ul>
+        <button class="tier-btn" onclick="selectTier('elitedomination','Elite Brand Domination','4,000')">
+          Claim This Tier
+          <span class="tier-btn-arrow"><svg viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
+        </button>
+      </div>
+    </div>
+    <div class="pricing-note">🔒 Territory exclusivity included — your niche + city locked per tier. Max 3 equipment brands per territory.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">FITFLUXSTUDIO</div>
+  <div class="footer-copy">© 2025 FitFlux Studio. Built for brands that move.</div>
+</footer>
+
+<script>
+window.addEventListener('load',function(){
+  setTimeout(function(){document.getElementById('hero').classList.add('vis');},200);
+});
+document.querySelectorAll('a[href="#offer"],a[href="#pricing"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    document.getElementById(this.getAttribute('href').slice(1)).scrollIntoView({behavior:'smooth'});
+  });
+});
+function selectTier(tier,name,price){
+  window.location.href='fitflux-territory-form-equipment.html?tier='+tier+'&offer=equipment_smm&offerName='+encodeURIComponent(name)+'&price='+encodeURIComponent(price)+'&niche=Fitness+Equipment+%26+Retail+Brand';
+}
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}});},{threshold:0.1});
+document.querySelectorAll('.pain-card,.process-step,.result-box,.tier-card').forEach(function(el){
+  el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .65s ease,transform .65s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
