@@ -115,10 +115,39 @@
         cursor: pointer;
         transition: all 0.2s;
       }
-      .topnav-tab.active {
-        background: rgba(181, 240, 60, 0.15);
-        color: #b5f03c;
-      }
+   .topnav-tab.active {x
+  background: rgba(181, 240, 60, 0.15);
+  color: #b5f03c;
+  position: relative;
+  overflow: visible;
+}
+
+.topnav-tab.active::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 8px;
+  padding: 1.5px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--sa),
+    rgba(204, 255, 0, 0) 0deg,
+    rgba(204, 255, 0, 0.7) 55deg,
+    rgba(204, 255, 0, 1) 85deg,
+    rgba(204, 255, 0, 0.7) 115deg,
+    rgba(204, 255, 0, 0) 170deg,
+    rgba(204, 255, 0, 0) 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spinSA 2.8s linear infinite;
+}
       .topnav-cta {
         background: #c2f050;
         color: #0f2208;
@@ -172,9 +201,9 @@
       /* ── HERO ── */
       .hero {
         background: #0f2208;
-        padding: 80px var(--px) 72px;
+        padding: 0.5px var(--px) 0px;
         position: relative;
-        overflow: hidden;
+        overflow: visible;
       }
       .hero::before {
         content: "";
@@ -568,6 +597,7 @@
         transform: translateY(-4px);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
       }
+    
       .tier-card.featured {
         border-color: var(--dg);
         box-shadow: 0 4px 32px rgba(45, 106, 15, 0.15);
@@ -1504,8 +1534,13 @@
         transition:
           opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
           transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-          height: 600px;
-          margin-top: 50px;
+          position: absolute;
+          height: 850px;
+           top: 0;
+          right: 0;
+          clip-path: inset(0 0 233px 0);
+          -webkit-mask-image: linear-gradient(to bottom, black 9000%, transparent 100%);
+mask-image: linear-gradient(to bottom, black 2000%, transparent 100%);
       }
 
       .hero-img-reveal.is-visible {
@@ -1536,6 +1571,7 @@
         inset: -1.5px;
         border-radius: 50px;
         padding: 1.5px;
+        pointer-events: none;
         background: conic-gradient(
           from var(--sa),
           rgba(204, 255, 0, 0) 0deg,
@@ -1569,6 +1605,7 @@
         inset: 0;
         border-radius: 50px;
         border: 1px solid rgba(204, 255, 0, 0.12);
+        pointer-events: none;
       }
       .ff-sub-wrap {
         margin-bottom: clamp(24px, 3.5vh, 36px);
@@ -1614,6 +1651,19 @@
         text-shadow: 0 0 12px rgba(204, 255, 0, 0.5);
       }
     </style>
+    <script>
+(function() {
+  var angle = 0;
+  setInterval(function() {
+    angle = (angle + 2) % 360;
+    var items = document.querySelectorAll('.ff-sub-item');
+    if (!items.length) return;
+    var nearRight = (angle > 200 && angle < 340);
+    items[0].classList.remove('lit');
+    items[1].classList.toggle('lit', nearRight);
+  }, 1000 / 60);
+})();
+</script>
   </head>
   <body>
     <script>
@@ -1667,9 +1717,9 @@
 ══════════════════════════════════════ -->
     <div id="page1" class="page active">
       <!-- HERO -->
-      <section class="hero" style="margin-top:-10px; height: 600px;"
+      <section class="hero" style="margin-top:-18.5px; position: relative;">
         <div class="hero-inner">
-          <div class="hero-left" style="margin-top: 40px; margin-bottom: 100px; position: relative">
+          <div class="hero-left" style="margin-top: 80px; margin-bottom: 70px; position: relative">
             <div class="hero-badge">
               <div class="hero-badge-dot"></div>
               <div class="hero-badge-text">
@@ -1693,17 +1743,13 @@
               <div class="ff-sub-row">
                 <button
                   class="hero-btn-primary ff-sub-item"
-                  onclick="
-                    document
-                      .getElementById('tiers')
-                      .scrollIntoView({ behavior: 'smooth' })
-                  "
+             onclick="window.scrollTo({ top: document.getElementById('tiers').offsetTop, behavior: 'smooth' })"
                 >
                   See the plans ↓
                 </button>
                 <button
                   class="hero-btn-secondary ff-sub-item"
-                  onclick="goPage2()"
+                  onclick="goPage2(); setTimeout(function(){ document.getElementById('journey').scrollIntoView({ behavior: 'smooth' }); }, 300);"
                 >
                   See what changes in 90 days →
                 </button>
@@ -1755,9 +1801,10 @@
           style="
             /* height: 700px; */
             margin-left: 80px;
+            margin-top: 85.9px;
+
             position: absolute;
             z-index: 1;
-            top: 0;
             right: 0;
           "
         />
@@ -2036,9 +2083,9 @@
             "
           ></div>
 
-          <div class="tiers-grid">
+                    <div class="tiers-grid">
             <!-- PRESENCE -->
-            <div class="tier-card">
+            <div class="tier-card tier-presence">
               <div class="tier-header presence">
                 <span class="tier-tag presence">Starter</span>
                 <div class="tier-name presence">Presence</div>
@@ -2046,77 +2093,49 @@
                   "You show up every week. Without touching your phone."
                 </div>
                 <div class="tier-price-row">
-                  <div class="tier-price presence" id="price-presence">
-                    $350
-                  </div>
-                  <div class="tier-price-per presence" id="per-presence">
-                    /month
-                  </div>
+                  <div class="tier-price presence" id="price-presence">$350</div>
+                  <div class="tier-price-per presence" id="per-presence">/month</div>
                 </div>
               </div>
               <div class="pill-grid presence-pills">
                 <div class="pill" style="background: rgba(45, 106, 15, 0.08)">
                   <div class="pill-num" style="color: var(--dg)">6</div>
-                  <div class="pill-label" style="color: var(--dg)">
-                    Posts/wk
-                  </div>
+                  <div class="pill-label" style="color: var(--dg)">Posts/wk</div>
                 </div>
                 <div class="pill" style="background: rgba(45, 106, 15, 0.08)">
                   <div class="pill-num" style="color: var(--dg)">3+3</div>
-                  <div class="pill-label" style="color: var(--dg)">
-                    Vid+Graphic
-                  </div>
+                  <div class="pill-label" style="color: var(--dg)">Vid+Graphic</div>
                 </div>
                 <div class="pill" style="background: rgba(45, 106, 15, 0.08)">
                   <div class="pill-num" style="color: var(--dg)">5</div>
-                  <div class="pill-label" style="color: var(--dg)">
-                    Stories/wk
-                  </div>
+                  <div class="pill-label" style="color: var(--dg)">Stories/wk</div>
                 </div>
               </div>
               <div class="tier-body light">
                 <div class="tier-section-label">What's included</div>
                 <div class="tier-row">
                   <div class="tier-check green">✓</div>
-                  <div class="tier-item">
-                    <strong>Content pillar + story strategy</strong> — every
-                    post has a purpose, every week builds on the last
-                  </div>
+                  <div class="tier-item"><strong>Content pillar + story strategy</strong> — every post has a purpose, every week builds on the last</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check green">✓</div>
-                  <div class="tier-item">
-                    <strong>Full caption copywriting</strong> in your voice, for
-                    your niche
-                  </div>
+                  <div class="tier-item"><strong>Full caption copywriting</strong> in your voice, for your niche</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check green">✓</div>
-                  <div class="tier-item">
-                    <strong>Brand voice intake</strong> — sounds like you, not
-                    an agency
-                  </div>
+                  <div class="tier-item"><strong>Brand voice intake</strong> — sounds like you, not an agency</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check green">✓</div>
-                  <div class="tier-item">
-                    <strong>Profile optimisation</strong> — the right client
-                    finds you first
-                  </div>
+                  <div class="tier-item"><strong>Profile optimisation</strong> — the right client finds you first</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check green">✓</div>
-                  <div class="tier-item">
-                    <strong>Content scheduling</strong> — posted at peak times,
-                    automatically
-                  </div>
+                  <div class="tier-item"><strong>Content scheduling</strong> — posted at peak times, automatically</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check green">✓</div>
-                  <div class="tier-item">
-                    <strong>Live dashboard</strong> — daily, weekly &amp;
-                    monthly activity in real time
-                  </div>
+                  <div class="tier-item"><strong>Live dashboard</strong> — daily, weekly &amp; monthly activity in real time</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check dash">—</div>
@@ -2133,115 +2152,59 @@
                 <div class="tier-exclusive lx">
                   <div style="font-size: 16px">🔒</div>
                   <div class="tier-excl-text">
-                    <strong>Territory locked</strong> — niche + city reserved.
-                    Max 3 coaches per territory. Ever.
+                    <strong>Territory locked</strong> — niche + city reserved. Max 3 coaches per territory. Ever.
                   </div>
                 </div>
-                <button
-                  class="tier-cta presence"
-                  onclick="claimTerritory('Presence', '$350')"
-                >
+                <button class="tier-cta presence" onclick="claimTerritory('Presence', '$350')">
                   Start with Presence ↗
                 </button>
               </div>
             </div>
 
             <!-- AUTHORITY -->
-            <div class="tier-card featured">
+            <div class="tier-card featured tier-authority">
               <div class="tier-header authority">
                 <span class="tier-tag authority">Most Popular</span>
                 <div class="tier-name authority">Authority</div>
                 <div class="tier-hook authority">
-                  "You become the coach people already trust before they
-                  enquire."
+                  "You become the coach people already trust before they enquire."
                 </div>
                 <div class="tier-price-row">
-                  <div class="tier-price authority" id="price-authority">
-                    $700
-                  </div>
-                  <div class="tier-price-per authority" id="per-authority">
-                    /month
-                  </div>
+                  <div class="tier-price authority" id="price-authority">$700</div>
+                  <div class="tier-price-per authority" id="per-authority">/month</div>
                 </div>
               </div>
               <div class="pill-grid authority-pills">
-                <div
-                  class="pill"
-                  style="
-                    background: #1e3a0d;
-                    border: 1px solid rgba(181, 240, 60, 0.35);
-                  "
-                >
+                <div class="pill" style="background: #1e3a0d; border: 1px solid rgba(181, 240, 60, 0.35)">
                   <div class="pill-num" style="color: #b5f03c">12</div>
-                  <div
-                    class="pill-label"
-                    style="color: rgba(181, 240, 60, 0.8)"
-                  >
-                    Posts/wk
-                  </div>
+                  <div class="pill-label" style="color: rgba(181, 240, 60, 0.8)">Posts/wk</div>
                 </div>
-                <div
-                  class="pill"
-                  style="
-                    background: #1e3a0d;
-                    border: 1px solid rgba(181, 240, 60, 0.35);
-                  "
-                >
+                <div class="pill" style="background: #1e3a0d; border: 1px solid rgba(181, 240, 60, 0.35)">
                   <div class="pill-num" style="color: #b5f03c">6+6</div>
-                  <div
-                    class="pill-label"
-                    style="color: rgba(181, 240, 60, 0.8)"
-                  >
-                    Vid+Graphic
-                  </div>
+                  <div class="pill-label" style="color: rgba(181, 240, 60, 0.8)">Vid+Graphic</div>
                 </div>
-                <div
-                  class="pill"
-                  style="
-                    background: #1e3a0d;
-                    border: 1px solid rgba(181, 240, 60, 0.35);
-                  "
-                >
+                <div class="pill" style="background: #1e3a0d; border: 1px solid rgba(181, 240, 60, 0.35)">
                   <div class="pill-num" style="color: #b5f03c">10</div>
-                  <div
-                    class="pill-label"
-                    style="color: rgba(181, 240, 60, 0.8)"
-                  >
-                    Stories/wk
-                  </div>
+                  <div class="pill-label" style="color: rgba(181, 240, 60, 0.8)">Stories/wk</div>
                 </div>
               </div>
               <div class="tier-body dark">
-                <div class="tier-section-label dm">
-                  Everything in Presence, plus
+                <div class="tier-section-label dm">Everything in Presence, plus</div>
+                <div class="tier-row">
+                  <div class="tier-check lime">✓</div>
+                  <div class="tier-item light-text"><strong>Engagement management</strong> — comments &amp; replies handled in your voice</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check lime">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Engagement management</strong> — comments &amp;
-                    replies handled in your voice
-                  </div>
+                  <div class="tier-item light-text"><strong>Monthly strategy call</strong> — your content works toward a goal, not just a calendar</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check lime">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Monthly strategy call</strong> — your content works
-                    toward a goal, not just a calendar
-                  </div>
+                  <div class="tier-item light-text"><strong>Monthly performance report</strong> — follower growth, reach, engagement, enquiries</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check lime">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Monthly performance report</strong> — follower
-                    growth, reach, engagement, enquiries
-                  </div>
-                </div>
-                <div class="tier-row">
-                  <div class="tier-check lime">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Live dashboard</strong> — daily, weekly, monthly +
-                    <strong>enquiry tracking</strong>
-                  </div>
+                  <div class="tier-item light-text"><strong>Live dashboard</strong> — daily, weekly, monthly + <strong>enquiry tracking</strong></div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check dash">—</div>
@@ -2258,21 +2221,17 @@
                 <div class="tier-exclusive dx">
                   <div style="font-size: 16px">🔒</div>
                   <div class="tier-excl-text dm">
-                    <strong>Territory locked</strong> — niche + city reserved.
-                    Max 3 coaches per territory. Ever.
+                    <strong>Territory locked</strong> — niche + city reserved. Max 3 coaches per territory. Ever.
                   </div>
                 </div>
-                <button
-                  class="tier-cta authority"
-                  onclick="claimTerritory('Authority', '$700')"
-                >
+                <button class="tier-cta authority" onclick="claimTerritory('Authority', '$700')">
                   Start with Authority ↗
                 </button>
               </div>
             </div>
 
             <!-- CATEGORY -->
-            <div class="tier-card">
+            <div class="tier-card tier-category">
               <div class="tier-header category">
                 <span class="tier-tag category">Premium</span>
                 <div class="tier-name category">Category King/Queen</div>
@@ -2280,126 +2239,64 @@
                   "You own your niche online. Completely."
                 </div>
                 <div class="tier-price-row">
-                  <div class="tier-price category" id="price-category">
-                    $1,200
-                  </div>
-                  <div class="tier-price-per category" id="per-category">
-                    /month
-                  </div>
+                  <div class="tier-price category" id="price-category">$1,200</div>
+                  <div class="tier-price-per category" id="per-category">/month</div>
                 </div>
               </div>
               <div class="pill-grid category-pills">
-                <div
-                  class="pill"
-                  style="
-                    background: #2a1c06;
-                    border: 1px solid rgba(200, 137, 26, 0.4);
-                  "
-                >
+                <div class="pill" style="background: #2a1c06; border: 1px solid rgba(200, 137, 26, 0.4)">
                   <div class="pill-num" style="color: #e09b20">18</div>
-                  <div
-                    class="pill-label"
-                    style="color: rgba(224, 155, 32, 0.9)"
-                  >
-                    Posts/wk
-                  </div>
+                  <div class="pill-label" style="color: rgba(224, 155, 32, 0.9)">Posts/wk</div>
                 </div>
-                <div
-                  class="pill"
-                  style="
-                    background: #2a1c06;
-                    border: 1px solid rgba(200, 137, 26, 0.4);
-                  "
-                >
+                <div class="pill" style="background: #2a1c06; border: 1px solid rgba(200, 137, 26, 0.4)">
                   <div class="pill-num" style="color: #e09b20">10+8</div>
-                  <div
-                    class="pill-label"
-                    style="color: rgba(224, 155, 32, 0.9)"
-                  >
-                    Vid+Graphic
-                  </div>
+                  <div class="pill-label" style="color: rgba(224, 155, 32, 0.9)">Vid+Graphic</div>
                 </div>
-                <div
-                  class="pill"
-                  style="
-                    background: #2a1c06;
-                    border: 1px solid rgba(200, 137, 26, 0.4);
-                  "
-                >
+                <div class="pill" style="background: #2a1c06; border: 1px solid rgba(200, 137, 26, 0.4)">
                   <div class="pill-num" style="color: #e09b20">Daily</div>
-                  <div
-                    class="pill-label"
-                    style="color: rgba(224, 155, 32, 0.9)"
-                  >
-                    Stories
-                  </div>
+                  <div class="pill-label" style="color: rgba(224, 155, 32, 0.9)">Stories</div>
                 </div>
               </div>
               <div class="tier-body dark">
-                <div class="tier-section-label dm">
-                  Everything in Authority, plus
+                <div class="tier-section-label dm">Everything in Authority, plus</div>
+                <div class="tier-row">
+                  <div class="tier-check amber">✓</div>
+                  <div class="tier-item light-text"><strong>Full DM management</strong> — warm leads handled in your voice 24/7</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check amber">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Full DM management</strong> — warm leads handled in
-                    your voice 24/7
-                  </div>
+                  <div class="tier-item light-text"><strong>Bi-weekly strategy calls</strong> — fast pivots, faster growth</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check amber">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Bi-weekly strategy calls</strong> — fast pivots,
-                    faster growth
-                  </div>
+                  <div class="tier-item light-text"><strong>Ad creative built</strong> — ready when you want to scale</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check amber">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Ad creative built</strong> — ready when you want to
-                    scale
-                  </div>
+                  <div class="tier-item light-text"><strong>Competitor analysis</strong> — monthly deep dive on what's winning in your niche</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check amber">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Competitor analysis</strong> — monthly deep dive on
-                    what's winning in your niche
-                  </div>
+                  <div class="tier-item light-text"><strong>Hook writing</strong> — every caption engineered to stop the scroll</div>
                 </div>
                 <div class="tier-row">
                   <div class="tier-check amber">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Hook writing</strong> — every caption engineered to
-                    stop the scroll
-                  </div>
-                </div>
-                <div class="tier-row">
-                  <div class="tier-check amber">✓</div>
-                  <div class="tier-item light-text">
-                    <strong>Live dashboard</strong> — real-time activity +
-                    <strong>growth projections</strong>
-                  </div>
+                  <div class="tier-item light-text"><strong>Live dashboard</strong> — real-time activity + <strong>growth projections</strong></div>
                 </div>
                 <div class="tier-exclusive gx">
                   <div style="font-size: 16px">👑</div>
                   <div class="tier-excl-text gm">
-                    <strong style="color: var(--amber)"
-                      >You are the only coach</strong
-                    >
-                    in your niche + city. No exceptions. No second place.
+                    <strong style="color: var(--amber)">You are the only coach</strong> in your niche + city. No exceptions. No second place.
                   </div>
                 </div>
-                <button
-                  class="tier-cta category"
-                  onclick="claimTerritory('Category King/Queen', '$1,200')"
-                >
+                <button class="tier-cta category" onclick="claimTerritory('Category King/Queen', '$1,200')">
                   Claim my territory ↗
                 </button>
               </div>
             </div>
           </div>
           <!-- /tiers-grid -->
+
         </div>
       </section>
 
@@ -2527,19 +2424,10 @@
           text-align: center;
         "
       >
-        <button
-          onclick="goPage2()"
-          style="
-            background: var(--deep);
-            color: var(--lime);
-            font-family: &quot;DM Sans&quot;, sans-serif;
-            font-size: 13px;
-            font-weight: 800;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            letter-spacing: 0.04em;
+
+      <button
+onclick="goPage2(); setTimeout(function(){ document.getElementById('journey').scrollIntoView({ behavior: 'smooth' }); }, 300);"
+style="background: var(--deep); color: var(--lime); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 800; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; letter-spacing: 0.04em;"
           "
         >
           See what changes in 90 days →
@@ -2552,62 +2440,8 @@
      PAGE 2
 ══════════════════════════════════════ -->
     <div id="page2" class="page">
-      <!-- WHO IT'S FOR -->
-      <section class="for-section">
-        <div class="for-inner">
-          <div class="for-h2">This is built for you if —</div>
-          <div class="for-sub">
-            Be honest. If two or more of these hit, this is your next move.
-          </div>
-          <div class="for-grid">
-            <div class="for-item">
-              <div class="for-item-head">You go silent</div>
-              <div class="for-item-body">
-                You post consistently for a week then disappear for three. You
-                know it's a problem. You just can't fix it alone.
-              </div>
-            </div>
-            <div class="for-item">
-              <div class="for-item-head">You hate captions</div>
-              <div class="for-item-body">
-                You stare at the screen for 20 minutes to write three sentences
-                — then post something vague and hope for the best.
-              </div>
-            </div>
-            <div class="for-item">
-              <div class="for-item-head">No strategy</div>
-              <div class="for-item-body">
-                You post what feels right that day. No plan, no thread, no
-                story. Your content doesn't build on itself.
-              </div>
-            </div>
-            <div class="for-item">
-              <div class="for-item-head">Followers ≠ clients</div>
-              <div class="for-item-body">
-                You have an audience but they're not enquiring. The problem
-                isn't reach — it's that your content isn't converting.
-              </div>
-            </div>
-            <div class="for-item">
-              <div class="for-item-head">No time</div>
-              <div class="for-item-body">
-                You're coaching, managing clients, running a business. Content
-                is the last thing on your list — and it shows.
-              </div>
-            </div>
-            <div class="for-item">
-              <div class="for-item-head">Ready to scale</div>
-              <div class="for-item-body">
-                You know consistent, strategic content is the lever. You just
-                need someone to pull it for you.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- 90 DAY JOURNEY -->
-      <section class="journey">
+      <section class="journey" id="journey">
         <div class="journey-inner">
           <div>
             <div class="journey-left-h2">
@@ -2666,6 +2500,61 @@
           </div>
         </div>
       </section>
+      <!-- WHO IT'S FOR -->
+      <section class="for-section">
+        <div class="for-inner">
+          <div class="for-h2">This is built for you if —</div>
+          <div class="for-sub">
+            Be honest. If two or more of these hit, this is your next move.
+          </div>
+          <div class="for-grid">
+            <div class="for-item">
+              <div class="for-item-head">You go silent</div>
+              <div class="for-item-body">
+                You post consistently for a week then disappear for three. You
+                know it's a problem. You just can't fix it alone.
+              </div>
+            </div>
+            <div class="for-item">
+              <div class="for-item-head">You hate captions</div>
+              <div class="for-item-body">
+                You stare at the screen for 20 minutes to write three sentences
+                — then post something vague and hope for the best.
+              </div>
+            </div>
+            <div class="for-item">
+              <div class="for-item-head">No strategy</div>
+              <div class="for-item-body">
+                You post what feels right that day. No plan, no thread, no
+                story. Your content doesn't build on itself.
+              </div>
+            </div>
+            <div class="for-item">
+              <div class="for-item-head">Followers ≠ clients</div>
+              <div class="for-item-body">
+                You have an audience but they're not enquiring. The problem
+                isn't reach — it's that your content isn't converting.
+              </div>
+            </div>
+            <div class="for-item">
+              <div class="for-item-head">No time</div>
+              <div class="for-item-body">
+                You're coaching, managing clients, running a business. Content
+                is the last thing on your list — and it shows.
+              </div>
+            </div>
+            <div class="for-item">
+              <div class="for-item-head">Ready to scale</div>
+              <div class="for-item-body">
+                You know consistent, strategic content is the lever. You just
+                need someone to pull it for you.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
 
       <!-- OBJECTIONS -->
       <section class="obj-section">
@@ -2865,6 +2754,7 @@
         document.getElementById("nav1").className = "topnav-tab active";
         document.getElementById("nav2").className = "topnav-tab";
         window.scrollTo({ top: 0, behavior: "smooth" });
+        document.querySelector(".hero-img-reveal").style.display = "block";
       }
       function goPage2() {
         document.getElementById("page1").className = "page";
@@ -2872,6 +2762,7 @@
         document.getElementById("nav1").className = "topnav-tab";
         document.getElementById("nav2").className = "topnav-tab active";
         window.scrollTo({ top: 0, behavior: "smooth" });
+        document.querySelector(".hero-img-reveal").style.display = "none";
       }
       function toggleObj(header) {
         var ans = header.nextElementSibling;
