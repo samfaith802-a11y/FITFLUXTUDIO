@@ -119,7 +119,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--deep);color:#fff;overflow
 .ff-screen{transition:opacity .3s ease,transform .3s ease}
 .ff-screen.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;width:100%;transform:translateX(24px)}
 .ff-screen.visible{opacity:1;pointer-events:auto;position:relative;transform:translateX(0)}
-
+video::-webkit-media-controls{display:none!important;}
+video::-webkit-media-controls-enclosure{display:none!important;}
+video::-webkit-media-controls-panel{display:none!important;}
 @media(max-width:600px){.ff-h1{font-size:clamp(44px,14vw,72px)}.ff-sub-item{font-size:11px}.ff-modal{border-radius:16px;padding:20px 16px}.ff-pitch-content{text-align:left}.ff-niche-grid{grid-template-columns:1fr;gap:10px}.ff-niche-card{padding:18px 16px 16px;flex-direction:row;text-align:left;align-items:center;gap:14px}.ff-niche-icon{font-size:28px;margin-bottom:0;flex-shrink:0}.ff-niche-label{font-size:14px}.ff-niche-sub{font-size:9px}.ff-niche-arrow{margin-top:0;margin-left:auto}}
 </style>
 </head>
@@ -339,8 +341,9 @@ setTimeout(function(){document.getElementById('ffHC').classList.add('vis');},500
   var v = document.getElementById('ffVid');
   if(!v) return;
   v.muted = true;
+  v.load();
   var p = v.play();
-  if(p !== undefined){ p.catch(function(){ v.muted=true; v.play(); }); }
+  if(p !== undefined){ p.catch(function(){ v.muted=true; v.load(); v.play(); }); }
   document.addEventListener('touchstart', function(){ v.muted=true; v.play(); }, {once:true, passive:true});
 })();
 var ob=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.15});
