@@ -1376,7 +1376,8 @@
 
     <script>
       function setBilling(plan) {
-        var btns = ["monthly", "2month", "3month"];
+  window._selectedBilling = plan;
+  var btns = ["monthly", "2month", "3month"];
         btns.forEach(function(b) {
           var el = document.getElementById("bill-" + b);
           if (b === plan) { el.style.background = "#1A3608"; el.style.color = "#B5F03C"; }
@@ -1509,7 +1510,8 @@
       function claimTerritory(tier, price) {
         var tierMap = { 'Presence': 'presence', 'Authority': 'authority', 'Category King/Queen': 'categoryking' };
         var tierKey = tierMap[tier] || 'presence';
-        window.location.href = 'https://canvafitflux.vercel.app/fitflux-territory-form.html?tier=' + tierKey;
+        var billing = window._selectedBilling || 'monthly';
+window.location.href = 'https://canvafitflux.vercel.app/fitflux-territory-form.html?tier=' + tierKey + '&billing=' + billing;
       }
       function closeClaimOverlay() { document.getElementById("claimOverlay").style.display = "none"; }
       function submitClaim() {
